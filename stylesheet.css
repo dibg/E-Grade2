@@ -1,0 +1,71 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+
+h1 {
+    font-weight: 100;
+    text-align: center;
+    font-size: 2.3em;
+    color: #ff4e62;
+
+}
+
+input[type=submit] {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+input[type=text], input[type=password] {
+    height: 44px;
+    font-size: 16px;
+    color: blue;
+    width: 100%;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    background: white;
+    border: 1px solid grey;
+    padding: 0 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+input[type=text]:hover, input[type=password]:hover {
+    border: 1px solid grey;
+    color: blue;
+    -moz-box-shadow: inset 0 1px 2px black;
+    -webkit-box-shadow: inset 0 1px 2px black;
+    box-shadow: inset 0 1px 2px black;
+}
+
+.login {
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    height: 36px;
+    padding: 0 8px;
+}
+
+.login-submit {
+
+    color: darkblue;
+    border: 2px darkblue solid;
+    background: white;
+
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .3s;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    display: inline-block;
+
+}
+
+.login-submit:hover {
+    background-color: darkblue;
+    border: 2px darkblue solid;
+    color: #fff
+
+}

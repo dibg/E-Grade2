@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="stylesheet.css">
+
 <form action="loginSubmit.php" method="post">
     <h1> E-Grade Log-in</h1><br>
     Username:<input type="text" name="username" id="username"  placeholder="Username"><br>
@@ -6,3 +8,6 @@
 </form>
 
 <?php
+include 'functions.php';
+    clearSession();
+?>
