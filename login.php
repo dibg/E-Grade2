@@ -1,5 +1,6 @@
-<?php include 'functions.php'; ?>
-<link rel="stylesheet" href="stylesheet.css?1.1">
+<?php
+    include 'header.php';
+?>
 
 <form action="loginSubmit.php" method="post">
     <h1>E-Grade Log-in</h1><br>
@@ -10,5 +11,7 @@
 </form>
 
 <?php
+    include 'loginHelper.php';
     clearSession();
+    include 'footer.php';
 ?>

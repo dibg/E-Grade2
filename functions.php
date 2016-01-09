@@ -77,18 +77,14 @@ function fadeOut($element, $milliseconds) {
     ', $element, $milliseconds);
 }
 
-//function fadeText($text, $milliseconds) {
-//
-//}
-
 function loginCredentialsError () {
     if(isset($_GET['login'])){
         if($_GET['login'] == 'failed'){
             fadeOut("h3", 3000);
-            echo "<h3>The credentials is incorrect please try again.</h3>";
+            echo "<h3 id='error'>The credentials is incorrect please try again.</h3>";
         } else if ($_GET['login'] == 'admin') {
             fadeOut("h3", 3000);
-            echo "<h3>Very Funny.</h3>";
+            echo "<h3 id='error'>Very Funny.</h3>";
         }
     }
 }
@@ -96,6 +92,7 @@ function loginCredentialsError () {
 function getStudentGrades($username) {
     $query = mysql_query("CALL getStudentGrades('$username')");
 
+    $result = null;
     $i = 0;
     while($row = mysql_fetch_array($query)) {
         $result[$i]['course'] = $row['courseName'];
@@ -105,15 +102,19 @@ function getStudentGrades($username) {
     return $result;
 }
 
-function arrayFromStudentGrades($username) {
+function tableWithStudentGrades($username) {
     $grades = getStudentGrades($username);
-    $output = "<table>";
-    foreach($grades as $i => $obj) {
-        $course = $obj['course'];
-        $grade = $obj['grade'];
+    $output = "<table><th>Course</th><th>Grade</th>";
+    if(isset($grades) && $grades != null){
+        foreach($grades as $i => $obj) {
+            $course = $obj['course'];
+            $grade = $obj['grade'];
 
-        $output .= "<tr><td>$i</td><td>$course</td><td>$grade</td></tr>";
+            $output .= "<tr><td>$course</td><td>$grade</td></tr>";
+        }
     }
+
+    $output .="</table>";
 
     return $output;
 }
