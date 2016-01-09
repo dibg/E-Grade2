@@ -19,32 +19,28 @@ function loginAndRedirect($username, $password)
             session_start();
             $_SESSION["user"] = $rowStudent['studentUsername'];
             $_SESSION["role"] = "STUDENT";
-            header("Location: student.php");
-            exit();
+            redirectTo("student.php");
         }
 
         if(isset($rowProfessor['professorUsername']) && isset($rowProfessor['professorPassword'])){
             session_start();
             $_SESSION["user"] = $rowProfessor['professorUsername'];
             $_SESSION["role"] = "PROFESSOR";
-            header("Location: professor.php");
-            exit();
+            redirectTo("professor.php");
         }
 
         if(isset($rowSecretary['secretaryUsername']) && isset($rowSecretary["secretaryPassword"])){
             session_start();
             $_SESSION["user"] = $rowSecretary['secretaryUsername'];
             $_SESSION["role"] = "SECRETARY";
-            header("Location: secretary.php");
-            exit();
+            redirectTo("secretary.php");
         }
 
         if(isset($rowAdmin['adminUsername']) && isset($rowAdmin['adminPassword'])){
             session_start();
             $_SESSION["user"] = $rowAdmin['adminUsername'];
             $_SESSION["role"] = "ADMIN";
-            header("Location: administrator.php");
-            exit();
+            redirectTo("administrator.php");
         }
     }
 }
@@ -53,13 +49,71 @@ function checkAndRedirectNotAuthorizedUsers($session, $expectedRole) {
     if(isset($session)) {
         $role = $session['role'];
         if($role != $expectedRole) {
-            header("Location: accessDenied.php");
+            redirectTo("accessDenied.php");
         }
     } else {
-        header("Location: accessDenied.php");
+        redirectTo("accessDenied.php");
     }
 }
 
 function clearSession() {
     session_unset();
+}
+
+function redirectTo($page) {
+    header("Location: " . $page);
+    exit();
+}
+
+function fadeOut($element, $milliseconds) {
+    echo "<script src='jquery.min.js'></script>";
+    printf('
+    <script>
+        $(document).ready(function(){
+            $(\'%s\').fadeOut(%d
+             );
+        });
+    </script>
+    ', $element, $milliseconds);
+}
+
+//function fadeText($text, $milliseconds) {
+//
+//}
+
+function loginCredentialsError () {
+    if(isset($_GET['login'])){
+        if($_GET['login'] == 'failed'){
+            fadeOut("h3", 3000);
+            echo "<h3>The credentials is incorrect please try again.</h3>";
+        } else if ($_GET['login'] == 'admin') {
+            fadeOut("h3", 3000);
+            echo "<h3>Very Funny.</h3>";
+        }
+    }
+}
+
+function getStudentGrades($username) {
+    $query = mysql_query("CALL getStudentGrades('$username')");
+
+    $i = 0;
+    while($row = mysql_fetch_array($query)) {
+        $result[$i]['course'] = $row['courseName'];
+        $result[$i]['grade'] = $row['grade'];
+        $i++;
+    }
+    return $result;
+}
+
+function arrayFromStudentGrades($username) {
+    $grades = getStudentGrades($username);
+    $output = "<table>";
+    foreach($grades as $i => $obj) {
+        $course = $obj['course'];
+        $grade = $obj['grade'];
+
+        $output .= "<tr><td>$i</td><td>$course</td><td>$grade</td></tr>";
+    }
+
+    return $output;
 }

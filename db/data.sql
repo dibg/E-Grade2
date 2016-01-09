@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `grade` WRITE;
 /*!40000 ALTER TABLE `grade` DISABLE KEYS */;
-INSERT INTO `grade` VALUES (8.4,1,1),(7.2,1,2),(9,2,1),(10,2,2),(8,3,3);
+INSERT INTO `grade` VALUES (8.4,1,1),(9,2,1),(7.2,1,2),(10,2,2),(7.4,5,3),(8,5,4);
 /*!40000 ALTER TABLE `grade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,6 +114,35 @@ LOCK TABLES `university` WRITE;
 INSERT INTO `university` VALUES (1,'cMIT'),(2,'YALE');
 /*!40000 ALTER TABLE `university` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database '3163_3362_3374'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `getStudentGrades` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getStudentGrades`(IN user CHAR(45))
+BEGIN
+    SELECT courseName, grade
+    FROM grade
+      INNER JOIN student
+        ON grade.student_studentId = student.studentId
+      INNER JOIN course
+        ON grade.course_courseId = course.courseId
+    where studentUsername = user;
+  END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -124,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-08 18:15:00
+-- Dump completed on 2016-01-09 13:43:38
