@@ -5,6 +5,4 @@
     $password = $_POST['password'];
     loginAndRedirect($username, $password);
 
-    header("Location: login.php?login=failed");
-
 ?>

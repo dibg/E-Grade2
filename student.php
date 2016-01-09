@@ -5,7 +5,7 @@
 
     echo "<h3>Welcome: " . $username . "</h3>";
     echo "<p>This is your grades: </p>";
-    echo tableWithStudentGrades($username);
+    echo getTableWithStudentGrades($username);
 
     include 'footer.php'
 ?>

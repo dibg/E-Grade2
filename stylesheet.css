@@ -19,6 +19,11 @@ h1{
     text-align: center;
     color: crimson;
 }
+#success {
+    font-weight: 100;
+    text-align: center;
+    color: limegreen;
+}
 
 input[type=submit] {
     width: 100%;
