@@ -68,23 +68,24 @@
     }
 
 </script>
-Quick login as:
-<button onclick="admin()">admin</button>
-<button onclick="secretary1()">secretary1</button>
-<button onclick="secretary2()">secretary2</button>
-<button onclick="professor1()">professor1</button>
-<button onclick="professor2()">professor2</button>
-<button onclick="professor3()">professor3</button>
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button onclick="student1()">student1</button>
-<button onclick="student2()">student2</button>
-<button onclick="student3()">student3</button>
-<button onclick="student4()">student4</button>
-<button onclick="student5()">student5</button>
-<button onclick="student6()">student6</button>
-
+<h4> Quick login as:</h4>
+<table align="center">
+    <tr>
+        <td><button onclick="admin()">admin</button></td>
+        <td><button onclick="secretary1()">secretary1</button></td>
+        <td><button onclick="secretary2()">secretary2</button></td>
+        <td><button onclick="professor1()">professor1</button></td>
+        <td><button onclick="professor2()">professor2</button></td>
+        <td><button onclick="professor3()">professor3</button></td>
+    </tr>
+    <tr>
+        <td><button onclick="student1()">student1</button></td>
+        <td><button onclick="student2()">student2</button></td>
+        <td><button onclick="student3()">student3</button></td>
+        <td><button onclick="student4()">student4</button></td>
+        <td><button onclick="student5()">student5</button></td>
+        <td><button onclick="student6()">student6</button></td>
+    </tr>
+</table>
 
 

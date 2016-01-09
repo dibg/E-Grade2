@@ -1,11 +1,17 @@
 <?php
-//    $path = $_SERVER["SCRIPT_NAME"];
-//    $file = basename($path, ".php");
+    $path = $_SERVER["SCRIPT_NAME"];
+    $file = basename($path, ".php");
+
     if(isset($_SESSION['role']) && $_SESSION['role'] != null){
         $role = $_SESSION['role'];
     } else {
         $role = "GUEST";
     }
+
+//    if($file == "login" || $file == "index")
+//    {
+//        $role = "GUEST";
+//    }
 
     if ($role == "STUDENT") {
         ?>
@@ -30,8 +36,8 @@
         ?>
         <ul>
             <li><a href="secretary.php" class = active>Home</a></li>
-            <<li><a href="manageStudents.php">Manage Students</a></li>
             <li><a href="manageProfessors.php">Manage Professors</a></li>
+            <li><a href="manageStudents.php">Manage Students</a></li>
             <li><a href="manageClasses.php">Manage Classes</a></li>
             <li><a href="manageGrades.php">Manage Grades</a></li>
             <ul style="float:right;list-style-type:none;">

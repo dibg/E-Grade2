@@ -39,6 +39,26 @@ function loginAndRedirect($username, $password)
     }
 }
 
+function redirectLoginUser(){
+    if (isset($_SESSION["user"]) && isset($_SESSION["role"]) && $_SESSION["user"] != null && $_SESSION["role"] != null) {
+        $role = $_SESSION['role'];
+        switch ($role) {
+            case "ADMIN":
+                redirectTo("administrator.php");
+                break;
+            case "SECRETARY":
+                redirectTo("secretary.php");
+                break;
+            case "PROFESSOR":
+                redirectTo("professor.php");
+                break;
+            case "STUDENT":
+                redirectTo("student.php");
+        }
+
+    }
+}
+
 function checkAndRedirectNotAuthorizedUsers($session, $expectedRole) {
     if(isset($session)) {
         $role = $session['role'];
@@ -166,4 +186,8 @@ function getTableWithAllDepartments($universityName) {
     $output .="</table>";
 
     return $output;
+}
+
+function generateDropDownList($data) {
+
 }
