@@ -81,11 +81,8 @@ function redirectTo($page) {
 
 function fadeOut($element, $milliseconds) {
     echo "<script src='jquery.min.js'></script>";
-    printf('
-    <script>
-        $(document).ready(function(){
-            $(\'%s\').fadeOut(%d
-             );
+    printf(').fadeOut(%d;
+            )
         });
     </script>
     ', $element, $milliseconds);
@@ -94,20 +91,20 @@ function fadeOut($element, $milliseconds) {
 function loginMessageHandler () {
     if(isset($_GET['login'])){
         if($_GET['login'] == 'failed'){
-            fadeOut("h3", 3000);
-            echo "<h3 id='error'>The credentials is incorrect please try again.</h3>";
+            fadeOut("h2", 3000);
+            echo "<h2 id='warning'>The credentials is incorrect please try again.</h2>";
         } else if ($_GET['login'] == 'admin') {
-            fadeOut("h3", 3000);
-            echo "<h3 id='error'>Very Funny.</h3>";
+            fadeOut("h2", 3000);
+            echo "<h2 id='warning'>Very Funny.</h2>";
         } else if ($_GET['login'] == 'logout') {
-            fadeOut("h3", 3000);
-            echo "<h3 id='success'>Successful logout.</h3>";
+            fadeOut("h2", 3000);
+            echo "<h2 id='success'>Successful logout.</h2>";
         }
     }
 }
 
 function getStudentGrades($username) {
-    $query = mysql_query("CALL getStudentGrades('$username')");
+    $query = mysql_query("CALL getStudentGrades('$username')") or die(mysql_error());
 
     $result = null;
     $i = 0;
@@ -121,7 +118,7 @@ function getStudentGrades($username) {
 
 function getTableWithStudentGrades($username) {
     $grades = getStudentGrades($username);
-    $output = "<table><tr><th>Course</th><th>Grade</th></tr>";
+    $output = "<table align='center'><tr><th>Course</th><th>Grade</th></tr>";
     if(isset($grades) && $grades != null){
         foreach($grades as $i => $obj) {
             $course = $obj['course'];
@@ -132,18 +129,18 @@ function getTableWithStudentGrades($username) {
     }
 
     $output .="</table>";
-
     return $output;
 }
 
 function getAllUniversities() {
-    $query = mysql_query("SELECT universityName FROM university");
+    $query = mysql_query("SELECT universityName FROM university") or die(mysql_error());
     $result = null;
     $i = 0;
     while($row = mysql_fetch_array($query)) {
         $result[$i] = $row['universityName'];
         $i++;
     }
+
     return $result;
 }
 
@@ -157,12 +154,11 @@ function getTableWithAllUniversities() {
     }
 
     $output .="</table>";
-
     return $output;
 }
 
 function getAllDepartments($universityName) {
-    $query = mysql_query("CALL getAllDepartments('$universityName')");
+    $query = mysql_query("CALL getAllDepartments('$universityName')") or die(mysql_error());
     $result = null;
     $i = 0;
     while($row = mysql_fetch_array($query)) {
@@ -170,7 +166,6 @@ function getAllDepartments($universityName) {
         $i++;
     }
     return $result;
-
 }
 
 function getTableWithAllDepartments($universityName) {
@@ -184,10 +179,17 @@ function getTableWithAllDepartments($universityName) {
     }
 
     $output .="</table>";
-
     return $output;
 }
 
 function generateDropDownList($data) {
+    $output = "<select>";
+    foreach ($data as $obj) {
+        $output .= "<option value='$obj'>$obj</option>";
+    }
+    $output .= "</select>";
 
+    return $output;
 }
+
+//function

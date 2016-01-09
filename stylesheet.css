@@ -19,7 +19,7 @@ h4 {
 }
 
 /* ---------------------- id ---------------------- */
-#error {
+#warning {
     font-weight: 100;
     text-align: center;
     color: crimson;
@@ -42,7 +42,6 @@ button, input[type=submit]{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -117,7 +116,7 @@ li a:hover {
 }
 
 .active {
-    background-color: deepskyblue;
+    background-color: darkslategrey;
 }
 
 /* ---------------------- table ---------------------- */
@@ -135,6 +134,17 @@ th {
     color: white;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
 
-/* ---------------------- ? ---------------------- */
+/* ---------------------- drop down ---------------------- */
+select {
+    width: 100%;
+    height: 3em;
+    margin-bottom: 10px;
+    text-align: center;
+    border: solid darkslategray 1px;
+    border-radius: 1px;
+    background-color: white;
+}

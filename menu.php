@@ -8,11 +8,6 @@
         $role = "GUEST";
     }
 
-//    if($file == "login" || $file == "index")
-//    {
-//        $role = "GUEST";
-//    }
-
     if ($role == "STUDENT") {
         ?>
         <ul>

@@ -1,8 +1,9 @@
 <?php
     include 'header.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, "SECRETARY");
+$username = $_SESSION['user'];
 
-    echo "you are in the secretary page";
+echo "<h1>Welcome: " . $username . "</h1>";
 
     include 'footer.php'
 ?>

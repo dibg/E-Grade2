@@ -1,5 +1,21 @@
 <?php
 include 'header.php';
+?>
 
+    <h4>Add Student:</h4>
+    <form action="" method="post">
+        <?php
+        $uni = getAllUniversities();
+        echo generateDropDownList($uni);
+        //todo change me
+        $uni = getAllUniversities();
+        echo generateDropDownList($uni);
+        ?>
+        <input type="text" name="StudentUsername" placeholder="Student Username"><br>
+        <input type="text" name="StudentPassword" placeholder="Student Password"><br>
+        <input type="submit" name="submit" value="add">
+    </form>
+
+<?php
 include 'footer.php';
 ?>
