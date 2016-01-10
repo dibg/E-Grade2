@@ -194,18 +194,42 @@ function getTableWithAllDepartments($universityName) {
     return $output;
 }
 
-function generateDropDownList($data, $nameTag, $classTag="none"){
-    $output = "<select name = '$nameTag'";
+function generateDropDownList($data, $nameTag, $classTag="none", $idTag="none"){
+    $output = "<select name='$nameTag'";
     if($classTag != "none"){
         $output .= " class='$classTag'";
     }
-    $output .= ">";
-
-    foreach ($data as $obj) {
-        $output .= "<option value='$obj'>$obj</option>";
+    if($idTag != "none"){
+        $output .= " id='$idTag'";
     }
+    $output .= ">";
+    $output .= generateOptions($data);
     $output .= "</select>";
 
+    return $output;
+}
+
+function generateDropDownListWithFirstOption($data, $firstOption, $nameTag, $idTag="none"){
+    $output = "<select name='$nameTag'";
+    if($idTag != "none"){
+        $output .= " id='$idTag'";
+    }
+    $output .= ">";
+    $output .= "<option value=''>$firstOption</option>";
+    $output .= generateOptions($data);
+    $output .= "</select>";
+
+    return $output;
+}
+
+function generateOptions($data) {
+    $output = "";
+
+    if(isSetAndIsNotNull($data)) {
+        foreach ($data as $obj) {
+            $output .= "<option value='$obj'>$obj</option>";
+        }
+    }
     return $output;
 }
 

@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+include 'departmentAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
 
@@ -17,9 +18,8 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
-        echo generateDropDownList($uni, 'selectedUniversity');
-        $dep = getDepartments('cMIT'); //todo
-        echo generateDropDownList($dep, 'selectedDepartment');
+        echo generateDropDownListWithFirstOption($uni, "Select University First", 'selectedUniversity', 'selectedUniversity');
+        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartment', 'selectedDepartment');
         ?>
         <input type="text" name="departmentName" placeholder="Department Name"><br>
         <input type="submit" name="submit" value="rename">

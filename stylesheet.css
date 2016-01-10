@@ -1,4 +1,4 @@
-/* ---------------------- header ---------------------- */
+/* ---------------------- headers ---------------------- */
 h1 ,h4{
     font-weight: 100;
     text-align: center;
@@ -12,10 +12,18 @@ h1 ,h4{
              1px -1px 0 darkslategrey,
             -1px  1px 0 darkslategrey,
              1px  1px 0 darkslategrey;
+    /*this is looks good in firefox 43 but in chrome 32 and opera 20 it is rather blurry*/
 }
 
 h4 {
     font-size: 2em;
+}
+/* ---------------------- body ---------------------- */
+
+body{
+    max-width: 1220px;
+    margin-top: 0;
+
 }
 
 /* ---------------------- class ---------------------- */
