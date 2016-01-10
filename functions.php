@@ -2,8 +2,7 @@
 session_start();
 include 'connection.php';
 
-function loginAndRedirect($username, $password)
-{
+function loginAndRedirect($username, $password) {
     if (isset($username) && isset($password)) {
         $queryStudent =     mysql_query("SELECT *  FROM student    WHERE studentUsername   = '$username' AND studentPassword    = ('$password')") or die(mysql_error());
         $queryProfessor =   mysql_query("SELECT *  FROM professor  WHERE professorUsername = '$username' AND professorPassword  = ('$password')") or die(mysql_error());
@@ -147,8 +146,7 @@ function getAllUniversities() {
     return $result;
 }
 
-function generateTableWithAllUniversities()
-{
+function generateTableWithAllUniversities(){
     $universities = getAllUniversities();
     $output = "<table><tr><th>University Name</th></tr>";
     if(isset($universities) && $universities != null){
@@ -161,9 +159,8 @@ function generateTableWithAllUniversities()
     return $output;
 }
 
-function getDepartments($universityName)
-{
-    $query = mysql_query("CALL getAllDepartments('$universityName')") or die(mysql_error());
+function getDepartments($universityName){
+    $query = mysql_query("SELECT departmentName FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';") or die(mysql_error());
     $result = null;
     $i = 0;
     while($row = mysql_fetch_array($query)) {
@@ -187,8 +184,7 @@ function getTableWithAllDepartments($universityName) {
     return $output;
 }
 
-function generateDropDownList($data, $nameTag)
-{
+function generateDropDownList($data, $nameTag){
     $output = "<select name = '$nameTag'>";
     foreach ($data as $obj) {
         $output .= "<option value='$obj'>$obj</option>";
@@ -198,22 +194,41 @@ function generateDropDownList($data, $nameTag)
     return $output;
 }
 
-function addUniversity($universityName)
-{
+function addUniversity($universityName){
     $query = mysql_query("INSERT INTO university(universityName) VALUES('$universityName');") or die(mysql_error());
     return $query;
 }
 
-function renameUniversity($universityName, $newName)
-{
+function renameUniversity($universityName, $newName){
     $query = mysql_query("UPDATE university SET universityName= '$newName' WHERE universityName = '$universityName'") or die(mysql_error());
     return $query;
 }
 
-function removeUniversity($universityName)
-{
+function removeUniversity($universityName){
     $query = mysql_query("DELETE FROM university WHERE universityName='$universityName';") or die(mysql_error());
     return $query;
 }
 
+function isSetAndIsNotNull($var) {
+    return (isset($var) && $var != null);
+}
+
+function reloadPage() {
+    header("Refresh:0");
+}
+
+function addDepartment($universityName, $departmentName) {
+    $query = mysql_query("INSERT INTO department(departmentName, university_universityId) VALUES('$departmentName',(SELECT universityId FROM university WHERE universityName = '$universityName'))") or die(mysql_error());
+    return $query;
+}
+
+function renameDepartment($selectedUniversity, $selectedDepartment, $newDepartmentName) {
+    $query = mysql_query("UPDATE department SET departmentName = '$newDepartmentName' WHERE departmentName = '$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity')") or die(mysql_error());
+    return $query;
+}
+
+function removeDepartment($selectedUniversity, $selectedDepartment) {
+    $query = mysql_query("DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');") or die(mysql_error());
+    return $query;
+}
 

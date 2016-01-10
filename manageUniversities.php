@@ -7,7 +7,7 @@
     <h4>Add University:</h4>
     <form action="" method="post">
         <input type="text" name="universityName" placeholder="University Name"><br>
-        <input type="submit" name="add" value="add">
+        <input type="submit" name="submit" value="add">
     </form>
 
     <h4>Remove University:</h4>
@@ -16,7 +16,7 @@
         $uni = getAllUniversities();
         echo generateDropDownList($uni, 'selectedUniversity');
         ?>
-        <input type="submit" name="remove" id="warning" value="remove">
+        <input type="submit" name="submit" id="warning" value="remove">
     </form>
 
     <h4>Rename University:</h4>
@@ -26,24 +26,33 @@
         echo generateDropDownList($uni, 'selectedUniversity');
         ?>
         <input type="text" name="universityName" placeholder="University Name"><br>
-        <input type="submit" name="rename" value="rename">
+        <input type="submit" name="submit" value="rename">
     </form>
 
 <?php
-if (isset($_POST) && $_POST != null) {
-    if (isset($_POST['universityName']) && $_POST['universityName'] != null) {
-        if (isset($_POST['add'])) {
-            addUniversity($_POST['universityName']);
-        } elseif (isset($_POST['rename'])) {
-            if (isset($_POST['selectedUniversity']) && $_POST['selectedUniversity'] != null) {
-                renameUniversity($_POST['selectedUniversity'], $_POST['universityName']);
+if(isSetAndIsNotNull($_POST)){
+    if (isSetAndIsNotNull($_POST['submit'])) {
+        $submit = $_POST['submit'];
+
+        if ($submit == 'add') {
+            if (isSetAndIsNotNull($_POST['universityName'])) {
+                $universityName = $_POST['universityName'];
+                addUniversity($universityName);
+            }
+        } elseif ($submit == 'rename') {
+            if (isSetAndIsNotNull($_POST['selectedUniversity']) && isSetAndIsNotNull($_POST['universityName'])) {
+                $selectedUniversity = $_POST['selectedUniversity'];
+                $universityName = $_POST['universityName'];
+                renameUniversity($selectedUniversity, $universityName);
+            }
+        } else if ($submit == 'remove') {
+            if (isSetAndIsNotNull($_POST['selectedUniversity'])) {
+                $selectedUniversity = $_POST['selectedUniversity'];
+                removeUniversity($selectedUniversity);
             }
         }
-    } else if (isset($_POST['remove'])) {
-        if (isset($_POST['selectedUniversity']) && $_POST['selectedUniversity'] != null) {
-            removeUniversity($_POST['selectedUniversity']);
-        }
     }
+    reloadPage();
 }
     include 'footer.php';
 ?>
