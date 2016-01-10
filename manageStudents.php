@@ -6,10 +6,10 @@ include 'header.php';
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        echo generateDropDownList($uni, 'selectedUniversity');
         //todo change me
         $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        echo generateDropDownList($uni, 'selectedUniversity');
         ?>
         <input type="text" name="StudentUsername" placeholder="Student Username"><br>
         <input type="text" name="StudentPassword" placeholder="Student Password"><br>

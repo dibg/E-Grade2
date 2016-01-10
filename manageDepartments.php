@@ -6,7 +6,7 @@ include 'header.php';
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        echo generateDropDownList($uni, 'selectedUniversity');
         ?>
         <input type="text" name="departmentName" placeholder="Department Name"><br>
         <input type="submit" name="submit" value="add">
@@ -16,10 +16,10 @@ include 'header.php';
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        echo generateDropDownList($uni, 'selectedUniversity');
         //todo change me
-        $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        $dep = getAllUniversities();//getDepartments("cmit");
+        echo generateDropDownList($dep, 'departmentName');
         ?>
         <input type="text" name="departmentName" placeholder="Department Name"><br>
         <input type="submit" name="submit" value="add">
@@ -29,7 +29,7 @@ include 'header.php';
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        echo generateDropDownList($uni, 'selectedUniversity');
         ?>
         <input type="submit" name="submit" id="warning" value="remove">
     </form>
@@ -38,9 +38,9 @@ include 'header.php';
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
-        echo generateDropDownList($uni);
-        $uni = getAllUniversities();
-        echo generateDropDownList($uni);
+        echo generateDropDownList($uni, 'selectedUniversity');
+        $dep = getAllUniversities();
+        echo generateDropDownList($uni, 'selectedDepartment');
         ?>
         <input type="text" name="departmentName" placeholder="Department Name"><br>
         <input type="submit" name="submit" value="add">

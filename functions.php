@@ -82,7 +82,7 @@ function redirectTo($page) {
 function fadeOut($element, $milliseconds) {
     echo "<script src='jquery.min.js'></script>";
     printf(').fadeOut(%d;
-            )
+             )
         });
     </script>
     ', $element, $milliseconds);
@@ -144,7 +144,8 @@ function getAllUniversities() {
     return $result;
 }
 
-function getTableWithAllUniversities() {
+function generateTableWithAllUniversities()
+{
     $universities = getAllUniversities();
     $output = "<table><tr><th>University Name</th></tr>";
     if(isset($universities) && $universities != null){
@@ -157,7 +158,8 @@ function getTableWithAllUniversities() {
     return $output;
 }
 
-function getAllDepartments($universityName) {
+function getDepartments($universityName)
+{
     $query = mysql_query("CALL getAllDepartments('$universityName')") or die(mysql_error());
     $result = null;
     $i = 0;
@@ -169,7 +171,7 @@ function getAllDepartments($universityName) {
 }
 
 function getTableWithAllDepartments($universityName) {
-    $departments = getAllDepartments($universityName);
+    $departments = getDepartments($universityName);
     $output = "<table><tr><th>Department Name</th></tr>";
 
     if(isset($departments) && $departments != null){
@@ -182,8 +184,9 @@ function getTableWithAllDepartments($universityName) {
     return $output;
 }
 
-function generateDropDownList($data) {
-    $output = "<select>";
+function generateDropDownList($data, $nameTag)
+{
+    $output = "<select name = '$nameTag'>";
     foreach ($data as $obj) {
         $output .= "<option value='$obj'>$obj</option>";
     }
@@ -192,4 +195,22 @@ function generateDropDownList($data) {
     return $output;
 }
 
-//function
+function addUniversity($universityName)
+{
+    $query = mysql_query("INSERT INTO university(universityName) VALUES('$universityName');") or die(mysql_error());
+    return $query;
+}
+
+function renameUniversity($universityName, $newName)
+{
+    $query = mysql_query("UPDATE university SET universityName= '$newName' WHERE universityName = '$universityName'") or die(mysql_error());
+    return $query;
+}
+
+function removeUniversity($universityName)
+{
+    $query = mysql_query("DELETE FROM university WHERE universityName='$universityName';") or die(mysql_error());
+    return $query;
+}
+
+
