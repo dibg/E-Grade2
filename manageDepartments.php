@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
 
     <h4>Add Department: </h4>
@@ -24,28 +25,30 @@ include 'header.php';
         <input type="submit" name="submit" value="rename">
     </form>
 
-    <h4>Remove Department: </h4>
+    <h4>Transfer Department: </h4>
     <form action="" method="post">
         <?php
         $uni = getAllUniversities();
         echo generateDropDownList($uni, 'selectedUniversity');
         $dep = getDepartments('cMIT'); //todo
         echo generateDropDownList($dep, 'selectedDepartment');
-        ?>
-        <input type="submit" name="submit" id="warning" value="remove">
-    </form>
-
-    <h4>Transfer Department: </h4>
-    <form action="" method="post">
-        <?php
         $uni = getAllUniversities();
         echo generateDropDownList($uni, 'selectedUniversity');
-        $dep = getAllUniversities();
-        echo generateDropDownList($uni, 'selectedDepartment');
         ?>
-        <input type="text" name="departmentName" placeholder="Department Name"><br>
-        <input type="submit" name="submit" value="add">
+        <input type="submit" name="submit" value="transfer">
     </form>
+
+    <h4>Remove Department: </h4>
+    <form action="" method="post">
+        <?php
+    $uni = getAllUniversities();
+    echo generateDropDownList($uni, 'selectedUniversity');
+    $dep = getDepartments('cMIT'); //todo
+    echo generateDropDownList($dep, 'selectedDepartment');
+    ?>
+        <input type="submit" name="submit" class="warningButton" value="remove">
+    </form>
+
 
 <?php
 if(isSetAndIsNotNull($_POST)){

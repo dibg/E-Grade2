@@ -16,10 +16,14 @@ function loginAndRedirect($username, $password) {
 
         if(isset($rowStudent['studentUsername']) && isset($rowStudent['studentPassword'])){
             $_SESSION["user"] = $rowStudent['studentUsername'];
+            $_SESSION["id"] = $rowStudent['studentId'];
+            $_SESSION["departmentId"] = $rowStudent['department_departmentId'];
             $_SESSION["role"] = "STUDENT";
             redirectTo("student.php");
         } else if(isset($rowProfessor['professorUsername']) && isset($rowProfessor['professorPassword'])){
             $_SESSION["user"] = $rowProfessor['professorUsername'];
+            $_SESSION["id"] = $rowProfessor['professorId'];
+            $_SESSION["departmentId"] = $rowProfessor['department_departmentId'];
             $_SESSION["role"] = "PROFESSOR";
             redirectTo("professor.php");
         }else if(isset($rowSecretary['secretaryUsername']) && isset($rowSecretary["secretaryPassword"])){
@@ -59,10 +63,16 @@ function redirectLoginUser(){
 }
 
 function checkAndRedirectNotAuthorizedUsers($session, $expectedRole) {
-    if(isset($session)) {
+    if(isSetAndIsNotNull($session)) {
         $role = $session['role'];
-        if($role != $expectedRole) {
-            redirectTo("accessDenied.php");
+        if(sizeof($expectedRole) > 1) {
+            if(!in_array($role, $expectedRole)) {
+                redirectTo("accessDenied.php");
+            }
+        } else {
+            if($role != $expectedRole) {
+                redirectTo("accessDenied.php");
+            }
         }
     } else {
         redirectTo("accessDenied.php");
@@ -94,13 +104,13 @@ function loginMessageHandler () {
     if(isset($_GET['login'])){
         if($_GET['login'] == 'failed'){
             fadeOut("h2", 3000);
-            echo "<h2 id='warning'>The credentials is incorrect please try again.</h2>";
+            echo "<h2 class='warning'>The credentials is incorrect please try again.</h2>";
         } else if ($_GET['login'] == 'admin') {
             fadeOut("h2", 3000);
-            echo "<h2 id='warning'>Very Funny.</h2>";
+            echo "<h2 class='warning'>Very Funny.</h2>";
         } else if ($_GET['login'] == 'logout') {
             fadeOut("h2", 3000);
-            echo "<h2 id='success'>Successful logout.</h2>";
+            echo "<h2 class='success'>Successful logout.</h2>";
         }
     }
 }
@@ -184,8 +194,13 @@ function getTableWithAllDepartments($universityName) {
     return $output;
 }
 
-function generateDropDownList($data, $nameTag){
-    $output = "<select name = '$nameTag'>";
+function generateDropDownList($data, $nameTag, $classTag="none"){
+    $output = "<select name = '$nameTag'";
+    if($classTag != "none"){
+        $output .= " class='$classTag'";
+    }
+    $output .= ">";
+
     foreach ($data as $obj) {
         $output .= "<option value='$obj'>$obj</option>";
     }
@@ -230,5 +245,16 @@ function renameDepartment($selectedUniversity, $selectedDepartment, $newDepartme
 function removeDepartment($selectedUniversity, $selectedDepartment) {
     $query = mysql_query("DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');") or die(mysql_error());
     return $query;
+}
+
+function getProfessorsUsernames($universityName, $departmentName) {
+    $query = mysql_query("SELECT professorUsername FROM professor INNER JOIN department ON professor.department_departmentId = department.departmentId INNER JOIN university WHERE universityName = '$universityName' and departmentName = '$departmentName'") or die(mysql_error());
+    $result = null;
+    $i = 0;
+    while($row = mysql_fetch_array($query)) {
+        $result[$i] = $row['professorUsername'];
+        $i++;
+    }
+    return $result;
 }
 

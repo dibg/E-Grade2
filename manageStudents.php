@@ -1,5 +1,6 @@
 <?php
-include 'header.php';
+    include 'header.php';
+    checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 
     <h4>Add Student:</h4>

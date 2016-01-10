@@ -18,16 +18,52 @@ h4 {
     font-size: 2em;
 }
 
-/* ---------------------- id ---------------------- */
-#warning {
+/* ---------------------- class ---------------------- */
+
+.warning {
     font-weight: 100;
     text-align: center;
     color: crimson;
 }
-#success {
+
+.warningButton {
+    /*border: 2px solid crimson;*/
+}
+
+.warningButton:hover {
+    color: white;
+    background-color: crimson !important;
+    border: 2px solid crimson;
+}
+
+.lowWarningButton:hover {
+    color: white;
+    background-color: orangered !important;
+    border: 2px solid orangered;
+}
+
+.infoButton:hover {
+    color: white;
+    background-color: dodgerblue !important;
+    border: 2px solid dodgerblue;
+}
+
+.success {
     font-weight: 100;
     text-align: center;
     color: limegreen;
+}
+
+.group1 {
+    background-color: rgba(254, 254, 220, 0.5);
+}
+
+.group2 {
+    background-color: rgba(220, 254, 254, 0.5);
+}
+
+.group3 {
+    background-color: rgba(254, 220, 254, 0.5);
 }
 
 /* ---------------------- buttons ---------------------- */

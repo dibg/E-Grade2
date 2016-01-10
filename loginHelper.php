@@ -71,12 +71,12 @@
 <h4> Quick login as:</h4>
 <table align="center">
     <tr>
-        <td><button onclick="admin()">admin</button></td>
-        <td><button onclick="secretary1()">secretary1</button></td>
-        <td><button onclick="secretary2()">secretary2</button></td>
-        <td><button onclick="professor1()">professor1</button></td>
-        <td><button onclick="professor2()">professor2</button></td>
-        <td><button onclick="professor3()">professor3</button></td>
+        <td><button class="warningButton" onclick="admin()">admin</button></td>
+        <td><button class="lowWarningButton" onclick="secretary1()">secretary1</button></td>
+        <td><button class="lowWarningButton" onclick="secretary2()">secretary2</button></td>
+        <td><button class="infoButton" onclick="professor1()">professor1</button></td>
+        <td><button class="infoButton" onclick="professor2()">professor2</button></td>
+        <td><button class="infoButton" onclick="professor3()">professor3</button></td>
     </tr>
     <tr>
         <td><button onclick="student1()">student1</button></td>

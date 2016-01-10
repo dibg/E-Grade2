@@ -1,5 +1,6 @@
 <?php
     include 'header.php';
+    checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 //echo getTableWithAllUniversities();
 //echo getTableWithAllDepartments("cmit");
 ?>
@@ -8,15 +9,6 @@
     <form action="" method="post">
         <input type="text" name="universityName" placeholder="University Name"><br>
         <input type="submit" name="submit" value="add">
-    </form>
-
-    <h4>Remove University:</h4>
-    <form action="" method="post">
-        <?php
-        $uni = getAllUniversities();
-        echo generateDropDownList($uni, 'selectedUniversity');
-        ?>
-        <input type="submit" name="submit" id="warning" value="remove">
     </form>
 
     <h4>Rename University:</h4>
@@ -28,6 +20,16 @@
         <input type="text" name="universityName" placeholder="University Name"><br>
         <input type="submit" name="submit" value="rename">
     </form>
+
+    <h4>Remove University:</h4>
+    <form action="" method="post">
+        <?php
+    $uni = getAllUniversities();
+    echo generateDropDownList($uni, 'selectedUniversity');
+    ?>
+        <input type="submit" name="submit" class="warningButton" value="remove">
+    </form>
+
 
 <?php
 if(isSetAndIsNotNull($_POST)){

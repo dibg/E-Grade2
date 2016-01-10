@@ -14,6 +14,10 @@
 </form>
 
 <?php
+    $a = array('aa', 'bb');
+    if(in_array('bB', $a) ) {
+        echo '1';
+    }
     include 'loginHelper.php';
     include 'footer.php';
 ?>

@@ -21,6 +21,7 @@
         ?>
         <ul>
             <li><a href="professor.php" class = active>Home</a></li>
+            <li><a href="manageGrades.php">Manage Grades</a></li>
             <ul style="float:right;list-style-type:none;">
                 <li><a href="logout.php">Logout</a></li>
             </ul>
@@ -34,6 +35,7 @@
             <li><a href="manageProfessors.php">Manage Professors</a></li>
             <li><a href="manageStudents.php">Manage Students</a></li>
             <li><a href="manageClasses.php">Manage Classes</a></li>
+            <li><a href="manageCourses.php">Manage Courses</a></li>
             <li><a href="manageGrades.php">Manage Grades</a></li>
             <ul style="float:right;list-style-type:none;">
                 <li><a href="logout.php">Logout</a></li>
@@ -49,6 +51,7 @@
             <li><a href="manageProfessors.php">Manage Professors</a></li>
             <li><a href="manageStudents.php">Manage Students</a></li>
             <li><a href="manageClasses.php">Manage Classes</a></li>
+            <li><a href="manageCourses.php">Manage Courses</a></li>
             <li><a href="manageGrades.php">Manage Grades</a></li>
             <ul style="float:right;list-style-type:none;">
                 <li><a href="logout.php">Logout</a></li>
