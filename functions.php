@@ -81,7 +81,7 @@ function redirectTo($page) {
 
 function fadeOut($element, $milliseconds) {
     echo "<script src='jquery.min.js'></script>";
-    printf(').fadeOut(%d;
+    printf(').fadeOut(%d
              )
         });
     </script>
