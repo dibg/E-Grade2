@@ -7,8 +7,13 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     <h4>Add Professor:</h4>
     <form action="" method="post">
         <?php
-        echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityAdd');
-        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentAdd');
+        if(isLoginAsAdmin()) {
+            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityAdd');
+            echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentAdd');
+        } else if(isLoginAsSecretary()) {
+            $departmentId = $_SESSION["departmentId"];
+            echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+        }
         ?>
         <input type="text" name="professorUsername" placeholder="Professor Username"><br>
         <input type="text" name="professorPassword" placeholder="Professor Password"><br>
@@ -19,16 +24,22 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     <h4>Change Professor Name And Password:</h4>
     <form action="" method="post">
         <?php
+    if(isLoginAsAdmin()) {
         echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityChange');
         echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
         echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorChange');
+    } else if(isLoginAsSecretary()) {
+        $departmentId = $_SESSION["departmentId"];
+        echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+        echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorChange', 'professorId', 'professorUsername');
+    }
     ?>
         <input type="text" name="professorUsername" placeholder="Professor Username"><br>
         <input type="text" name="professorPassword" placeholder="Professor Password"><br>
         <input type="submit" name="submit" value="change">
     </form>
 <?php
-    if($role == "ADMIN") {
+    if(isLoginAsAdmin()) {
 ?>
     <h4>Transfer Professor University And Department:</h4>
     <form action="" method="post">
@@ -48,9 +59,15 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     <h4>Remove Professor:</h4>
     <form action="" method="post">
         <?php
-        echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRemove');
-        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentRemove');
-        echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorRemove');
+        if(isLoginAsAdmin()) {
+            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRemove');
+            echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentRemove');
+            echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorRemove');
+        } else if(isLoginAsSecretary()) {
+            $departmentId = $_SESSION["departmentId"];
+            echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+            echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorChange', 'professorId', 'professorUsername');
+        }
         ?>
         <input type="submit" name="submit" class="warningButton" value="remove">
     </form>
@@ -61,7 +78,7 @@ if(isSetAndIsNotNull($_POST)){
         $submit = $_POST['submit'];
 
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['professorPassword']) && isSetAndIsNotNull($_POST['professorUsername'])&& isSetAndIsNotNull($_POST['selectedDepartmentId']) && isSetAndIsNotNull($_POST['selectedUniversity'])) {
+            if (isSetAndIsNotNull($_POST['professorPassword']) && isSetAndIsNotNull($_POST['professorUsername'])&& isSetAndIsNotNull($_POST['selectedDepartmentId'])) {
                 $departmentId = $_POST['selectedDepartmentId'];
                 $professorUsername = $_POST['professorUsername'];
                 $professorPassword = $_POST['professorPassword'];

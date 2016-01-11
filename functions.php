@@ -46,6 +46,14 @@ function loginAndRedirect($username, $password) {
     }
 }
 
+function isLoginAsAdmin() {
+    return $_SESSION["role"] == "ADMIN";
+}
+
+function isLoginAsSecretary() {
+    return $_SESSION["role"] == "SECRETARY";
+}
+
 function redirectLoginUser(){
     if (isset($_SESSION["user"]) && isset($_SESSION["role"]) && $_SESSION["user"] != null && $_SESSION["role"] != null) {
         $role = $_SESSION['role'];
