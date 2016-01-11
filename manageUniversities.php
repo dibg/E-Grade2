@@ -5,30 +5,36 @@
 //echo getTableWithAllDepartments("cmit");
 ?>
 
-    <h4>Add University:</h4>
-    <form action="" method="post">
-        <input type="text" name="universityName" placeholder="University Name"><br>
-        <input type="submit" name="submit" value="add">
-    </form>
+    <div class="university" id="add">
+        <h4>Add University:</h4>
+        <form action="" method="post">
+            <input type="text" name="universityName" placeholder="University Name"><br>
+            <input type="submit" name="submit" value="add">
+        </form>
+    </div>
 
-    <h4>Rename University:</h4>
-    <form action="" method="post">
-        <?php
+    <div class="university" id="rename">
+        <h4>Rename University:</h4>
+        <form action="" method="post">
+            <?php
+            $uni = getAllUniversitiesNames();
+            echo generateDropDownList($uni, 'selectedUniversity');
+            ?>
+            <input type="text" name="universityName" placeholder="University Name"><br>
+            <input type="submit" name="submit" value="rename">
+        </form>
+    </div>
+
+    <div class="university" id="remove">
+        <h4>Remove University:</h4>
+        <form action="" method="post">
+            <?php
         $uni = getAllUniversitiesNames();
         echo generateDropDownList($uni, 'selectedUniversity');
         ?>
-        <input type="text" name="universityName" placeholder="University Name"><br>
-        <input type="submit" name="submit" value="rename">
-    </form>
-
-    <h4>Remove University:</h4>
-    <form action="" method="post">
-        <?php
-    $uni = getAllUniversitiesNames();
-    echo generateDropDownList($uni, 'selectedUniversity');
-    ?>
-        <input type="submit" name="submit" class="warningButton" value="remove">
-    </form>
+            <input type="submit" name="submit" class="warningButton" value="remove">
+        </form>
+    </div>
 
 
 <?php

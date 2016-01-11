@@ -406,9 +406,24 @@ function transferProfessor($professorId, $departmentIdTo) {
 
     return $query;
 }
+
 function removeProfessor($professorId) {
     $query = mysql_query("DELETE FROM professor WHERE professorId = $professorId") or die(mysql_error());
 
     return $query;
 }
+
+function getStudents($departmentId) {
+    $query = mysql_query("SELECT * FROM students WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
+
+    return $result;
+}
+
+function addStudent($username, $password, $departmentId) {
+    $query = mysql_query("INSERT INTO student(studentUsername, studentPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)") or die(mysql_error());
+
+    return $query;
+}
+
 
