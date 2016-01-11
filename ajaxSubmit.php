@@ -39,6 +39,13 @@ if (isSetAndIsNotNull($_POST)) {
                     echo generateOptionsWithSpecifiedValueField($stu, 'studentId', 'studentUsername');
                 }
                 break;
+            case 'departmentIdAndReturnCourseId':
+                if (isSetAndIsNotNull($_POST[$key])) {
+                    $departmentId = $_POST[$key];
+                    $cou = getCourses($departmentId);
+                    echo generateOptionsWithSpecifiedValueField($cou, 'courseId', 'courseName');
+                }
+                break;
         }
     }
 } else {

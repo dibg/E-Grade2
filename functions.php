@@ -491,8 +491,37 @@ function transferStudent($studentId, $departmentIdTo) {
     $query = mysql_query("UPDATE student SET department_departmentId = $departmentIdTo WHERE studentId = $studentId") or die(mysql_error());
 
     return $query;
-
 }
 
+function getCourses($departmentId) {
+    $query = mysql_query("SELECT * FROM course WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
 
+    return $result;
+}
+
+function addCourse($courseName, $departmentId) {
+    $query = mysql_query("INSERT INTO course(courseName, department_departmentId) VALUES ('$courseName', '$departmentId')") or die(mysql_error());
+
+    return $query;
+}
+
+function removeCourse($courseId) {
+    $query = mysql_query("DELETE FROM course WHERE courseId = $courseId") or die(mysql_error());
+
+    return $query;
+}
+
+function renameCourse($courseName, $courseId) {
+    $query = mysql_query("UPDATE course SET courseName = '$courseName' WHERE courseId = $courseId") or die(mysql_error());
+
+    return $query;
+}
+
+function transferCourse($courseId, $departmentIdTo) {
+    $query = mysql_query("UPDATE course SET department_departmentId = $departmentIdTo WHERE courseId = $courseId") or die(mysql_error());
+
+    return $query;
+
+}
 
