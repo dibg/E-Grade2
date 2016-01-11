@@ -1,4 +1,6 @@
 <?php
+$output_buffering=16653; // 16k should be enough for everyone.
+ob_start();
 session_start();
 include 'connection.php';
 
@@ -9,10 +11,10 @@ function loginAndRedirect($username, $password) {
         $querySecretary =   mysql_query("SELECT *  FROM secretary  WHERE secretaryUsername = '$username' AND secretaryPassword  = ('$password')") or die(mysql_error());
         $queryAdmin =       mysql_query("SELECT *  FROM admin      WHERE adminUsername     = '$username' AND adminPassword      = ('$password')") or die(mysql_error());
 
-        $rowStudent = mysql_fetch_array($queryStudent);
-        $rowProfessor = mysql_fetch_array($queryProfessor);
-        $rowSecretary = mysql_fetch_array($querySecretary);
-        $rowAdmin = mysql_fetch_array($queryAdmin);
+        $rowStudent = mysql_fetch_assoc($queryStudent);
+        $rowProfessor = mysql_fetch_assoc($queryProfessor);
+        $rowSecretary = mysql_fetch_assoc($querySecretary);
+        $rowAdmin = mysql_fetch_assoc($queryAdmin);
 
         if(isset($rowStudent['studentUsername']) && isset($rowStudent['studentPassword'])){
             $_SESSION["user"] = $rowStudent['studentUsername'];
@@ -28,6 +30,8 @@ function loginAndRedirect($username, $password) {
             redirectTo("professor.php");
         }else if(isset($rowSecretary['secretaryUsername']) && isset($rowSecretary["secretaryPassword"])){
             $_SESSION["user"] = $rowSecretary['secretaryUsername'];
+            $_SESSION["id"] = $rowSecretary['secretaryId'];
+            $_SESSION["departmentId"] = $rowSecretary['department_departmentId'];
             $_SESSION["role"] = "SECRETARY";
             redirectTo("secretary.php");
         } else if(isset($rowAdmin['adminUsername']) && isset($rowAdmin['adminPassword'])){
@@ -120,11 +124,13 @@ function getStudentGrades($username) {
 
     $result = null;
     $i = 0;
-    while($row = mysql_fetch_array($query)) {
+
+    while($row = mysql_fetch_assoc($query)) {
         $result[$i]['course'] = $row['courseName'];
         $result[$i]['grade'] = $row['grade'];
         $i++;
     }
+
     return $result;
 }
 
@@ -144,11 +150,11 @@ function getTableWithStudentGrades($username) {
     return $output;
 }
 
-function getAllUniversities() {
+function getAllUniversitiesNames() {
     $query = mysql_query("SELECT universityName FROM university") or die(mysql_error());
     $result = null;
     $i = 0;
-    while($row = mysql_fetch_array($query)) {
+    while($row = mysql_fetch_assoc($query)) {
         $result[$i] = $row['universityName'];
         $i++;
     }
@@ -156,8 +162,21 @@ function getAllUniversities() {
     return $result;
 }
 
-function generateTableWithAllUniversities(){
-    $universities = getAllUniversities();
+function getAllUniversities() {
+    $query = mysql_query("SELECT * FROM university") or die(mysql_error());
+    $result = null;
+    $i = 0;
+
+    while($row = mysql_fetch_assoc($query)) {
+        $result[$i] = $row;
+        $i++;
+    }
+
+    return $result;
+}
+
+function generateTableWithAllUniversitiesNames(){
+    $universities = getAllUniversitiesNames();
     $output = "<table><tr><th>University Name</th></tr>";
     if(isset($universities) && $universities != null){
         foreach($universities as $i => $universityName) {
@@ -169,19 +188,34 @@ function generateTableWithAllUniversities(){
     return $output;
 }
 
-function getDepartments($universityName){
+function getDepartmentsNames($universityName){
     $query = mysql_query("SELECT departmentName FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';") or die(mysql_error());
     $result = null;
     $i = 0;
-    while($row = mysql_fetch_array($query)) {
+
+    while($row = mysql_fetch_assoc($query)) {
         $result[$i] = $row['departmentName'];
         $i++;
     }
+
+    return $result;
+}
+
+function getDepartments($universityName){
+    $query = mysql_query("SELECT departmentId, departmentName, university_universityId FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';") or die(mysql_error());
+    $result = null;
+    $i = 0;
+
+    while($row = mysql_fetch_assoc($query)) {
+        $result[$i] = $row;
+        $i++;
+    }
+
     return $result;
 }
 
 function getTableWithAllDepartments($universityName) {
-    $departments = getDepartments($universityName);
+    $departments = getDepartmentsNames($universityName);
     $output = "<table><tr><th>Department Name</th></tr>";
 
     if(isset($departments) && $departments != null){
@@ -222,12 +256,44 @@ function generateDropDownListWithFirstOption($data, $firstOption, $nameTag, $idT
     return $output;
 }
 
+function generateDropDownListWithFirstOptionAndSpecifiedValueKey($data, $firstOption, $nameTag, $idTag, $valueKey, $nameKey){
+    $output = "<select name='$nameTag'";
+    $output .= " id='$idTag'";
+    $output .= ">";
+    $output .= "<option value=''>$firstOption</option>";
+    $output .= generateOptionsWithSpecifiedValueField($data, $valueKey, $nameKey);
+    $output .= "</select>";
+
+    return $output;
+}
+
+function generateDropDownListWithSpecifiedValueKey($data, $nameTag, $idTag, $valueKey, $nameKey){
+    $output = "<select name='$nameTag'";
+    $output .= " id='$idTag'";
+    $output .= ">";
+    $output .= generateOptionsWithSpecifiedValueField($data, $valueKey, $nameKey);
+    $output .= "</select>";
+
+    return $output;
+}
+
 function generateOptions($data) {
     $output = "";
 
     if(isSetAndIsNotNull($data)) {
         foreach ($data as $obj) {
             $output .= "<option value='$obj'>$obj</option>";
+        }
+    }
+    return $output;
+}
+
+function generateOptionsWithSpecifiedValueField($data, $valueKey, $nameKey) {
+    $output = "";
+
+    if(isSetAndIsNotNull($data)) {
+        foreach ($data as $obj) {
+            $output .= "<option value='$obj[$valueKey]'>$obj[$nameKey]</option>";
         }
     }
     return $output;
@@ -270,6 +336,12 @@ function removeDepartment($selectedUniversity, $selectedDepartment) {
     $query = mysql_query("DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');") or die(mysql_error());
     return $query;
 }
+
+function transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId) {
+    $query = mysql_query("UPDATE department SET university_universityId = $transferToSelectedUniversityId WHERE departmentId = $selectedDepartmentId") or die(mysql_error());
+    return $query;
+}
+
 
 function getProfessorsUsernames($universityName, $departmentName) {
     $query = mysql_query("SELECT professorUsername FROM professor INNER JOIN department ON professor.department_departmentId = department.departmentId INNER JOIN university WHERE universityName = '$universityName' and departmentName = '$departmentName'") or die(mysql_error());

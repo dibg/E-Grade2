@@ -6,7 +6,7 @@
     <h4>Add Student:</h4>
     <form action="" method="post">
         <?php
-        $uni = getAllUniversities();
+        $uni = getAllUniversitiesNames();
         echo generateDropDownList($uni, 'selectedUniversity');
         //todo change me
         $dep =null;// getDepartments('cMIT'); //todo

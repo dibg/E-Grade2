@@ -14,10 +14,8 @@
 </form>
 
 <?php
-    $a = array('aa', 'bb');
-    if(in_array('bB', $a) ) {
-        echo '1';
-    }
+    $a = getDepartments('cmit');
+var_dump($a);
     include 'loginHelper.php';
     include 'footer.php';
 ?>

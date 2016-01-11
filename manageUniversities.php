@@ -14,7 +14,7 @@
     <h4>Rename University:</h4>
     <form action="" method="post">
         <?php
-        $uni = getAllUniversities();
+        $uni = getAllUniversitiesNames();
         echo generateDropDownList($uni, 'selectedUniversity');
         ?>
         <input type="text" name="universityName" placeholder="University Name"><br>
@@ -24,7 +24,7 @@
     <h4>Remove University:</h4>
     <form action="" method="post">
         <?php
-    $uni = getAllUniversities();
+    $uni = getAllUniversitiesNames();
     echo generateDropDownList($uni, 'selectedUniversity');
     ?>
         <input type="submit" name="submit" class="warningButton" value="remove">

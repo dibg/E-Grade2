@@ -3,11 +3,10 @@ include 'header.php';
 include 'departmentAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
-
     <h4>Add Department: </h4>
     <form action="" method="post">
         <?php
-        $uni = getAllUniversities();
+        $uni = getAllUniversitiesNames();
         echo generateDropDownList($uni, 'selectedUniversity');
         ?>
         <input type="text" name="departmentName" placeholder="Department Name"><br>
@@ -17,9 +16,8 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     <h4>Rename Department: </h4>
     <form action="" method="post">
         <?php
-        $uni = getAllUniversities();
-        echo generateDropDownListWithFirstOption($uni, "Select University First", 'selectedUniversity', 'selectedUniversity');
-        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartment', 'selectedDepartment');
+        echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRename');
+        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartment', 'selectedDepartmentRename');
         ?>
         <input type="text" name="departmentName" placeholder="Department Name"><br>
         <input type="submit" name="submit" value="rename">
@@ -28,12 +26,9 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     <h4>Transfer Department: </h4>
     <form action="" method="post">
         <?php
-        $uni = getAllUniversities();
-        echo generateDropDownList($uni, 'selectedUniversity');
-        $dep = getDepartments('cMIT'); //todo
-        echo generateDropDownList($dep, 'selectedDepartment');
-        $uni = getAllUniversities();
-        echo generateDropDownList($uni, 'selectedUniversity');
+        echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
+        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentTransferId');
+        echo generateDropDownListWithSpecifiedValueKey(getAllUniversities(), 'transferToSelectedUniversityId', 'transferToSelectedUniversityId', 'universityId', 'universityName')
         ?>
         <input type="submit" name="submit" value="transfer">
     </form>
@@ -41,10 +36,8 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     <h4>Remove Department: </h4>
     <form action="" method="post">
         <?php
-    $uni = getAllUniversities();
-    echo generateDropDownList($uni, 'selectedUniversity');
-    $dep = getDepartments('cMIT'); //todo
-    echo generateDropDownList($dep, 'selectedDepartment');
+        echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityDelete');
+        echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartment', 'selectedDepartmentDelete');
     ?>
         <input type="submit" name="submit" class="warningButton" value="remove">
     </form>
@@ -61,7 +54,7 @@ if(isSetAndIsNotNull($_POST)){
                 $selectedUniversity = $_POST['selectedUniversity'];
                 addDepartment($selectedUniversity, $departmentName);
             }
-        } elseif ($submit == 'rename') {
+        } else if ($submit == 'rename') {
             if (isSetAndIsNotNull($_POST['selectedUniversity']) && isSetAndIsNotNull($_POST['selectedDepartment']) && isSetAndIsNotNull($_POST['departmentName']) ) {
                 $selectedUniversity = $_POST['selectedUniversity'];
                 $selectedDepartment = $_POST['selectedDepartment'];
@@ -74,6 +67,12 @@ if(isSetAndIsNotNull($_POST)){
                 $selectedUniversity = $_POST['selectedUniversity'];
                 $selectedDepartment = $_POST['selectedDepartment'];
                 removeDepartment($selectedUniversity, $selectedDepartment);
+            }
+        } else if ($submit == 'transfer') {
+            if (isSetAndIsNotNull($_POST['selectedDepartmentId']) && isSetAndIsNotNull($_POST['transferToSelectedUniversityId'])) {
+                $selectedDepartmentId = $_POST['selectedDepartmentId'];
+                $transferToSelectedUniversityId = $_POST['transferToSelectedUniversityId'];
+                transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId);
             }
         }
     }
