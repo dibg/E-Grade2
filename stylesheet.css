@@ -22,8 +22,8 @@ h4 {
 
 body{
     max-width: 1220px;
-    margin-top: 0;
-
+    margin: auto !important;
+    float: none !important;
 }
 
 /* ---------------------- class ---------------------- */
@@ -57,7 +57,7 @@ body{
 }
 
 .success {
-    font-weight: 100;
+    /*font-weight: 100;*/
     text-align: center;
     color: limegreen;
 }

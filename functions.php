@@ -145,8 +145,8 @@ function getTableWithStudentGrades($username) {
             $output .= "<tr><td>$course</td><td>$grade</td></tr>";
         }
     }
-
     $output .="</table>";
+
     return $output;
 }
 
@@ -164,13 +164,7 @@ function getAllUniversitiesNames() {
 
 function getAllUniversities() {
     $query = mysql_query("SELECT * FROM university") or die(mysql_error());
-    $result = null;
-    $i = 0;
-
-    while($row = mysql_fetch_assoc($query)) {
-        $result[$i] = $row;
-        $i++;
-    }
+    $result = getAllRows($query);
 
     return $result;
 }
@@ -183,8 +177,8 @@ function generateTableWithAllUniversitiesNames(){
             $output .= "<tr><td>$universityName</td></tr>";
         }
     }
-
     $output .="</table>";
+
     return $output;
 }
 
@@ -203,13 +197,7 @@ function getDepartmentsNames($universityName){
 
 function getDepartments($universityName){
     $query = mysql_query("SELECT departmentId, departmentName, university_universityId FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';") or die(mysql_error());
-    $result = null;
-    $i = 0;
-
-    while($row = mysql_fetch_assoc($query)) {
-        $result[$i] = $row;
-        $i++;
-    }
+    $result = getAllRows($query);
 
     return $result;
 }
@@ -223,8 +211,8 @@ function getTableWithAllDepartments($universityName) {
             $output .= "<tr><td>$departmentName</td></tr>";
         }
     }
-
     $output .="</table>";
+
     return $output;
 }
 
@@ -285,6 +273,7 @@ function generateOptions($data) {
             $output .= "<option value='$obj'>$obj</option>";
         }
     }
+
     return $output;
 }
 
@@ -296,21 +285,25 @@ function generateOptionsWithSpecifiedValueField($data, $valueKey, $nameKey) {
             $output .= "<option value='$obj[$valueKey]'>$obj[$nameKey]</option>";
         }
     }
+
     return $output;
 }
 
 function addUniversity($universityName){
     $query = mysql_query("INSERT INTO university(universityName) VALUES('$universityName');") or die(mysql_error());
+
     return $query;
 }
 
 function renameUniversity($universityName, $newName){
     $query = mysql_query("UPDATE university SET universityName= '$newName' WHERE universityName = '$universityName'") or die(mysql_error());
+
     return $query;
 }
 
 function removeUniversity($universityName){
     $query = mysql_query("DELETE FROM university WHERE universityName='$universityName';") or die(mysql_error());
+
     return $query;
 }
 
@@ -324,21 +317,25 @@ function reloadPage() {
 
 function addDepartment($universityName, $departmentName) {
     $query = mysql_query("INSERT INTO department(departmentName, university_universityId) VALUES('$departmentName',(SELECT universityId FROM university WHERE universityName = '$universityName'))") or die(mysql_error());
+
     return $query;
 }
 
 function renameDepartment($selectedUniversity, $selectedDepartment, $newDepartmentName) {
     $query = mysql_query("UPDATE department SET departmentName = '$newDepartmentName' WHERE departmentName = '$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity')") or die(mysql_error());
+
     return $query;
 }
 
 function removeDepartment($selectedUniversity, $selectedDepartment) {
     $query = mysql_query("DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');") or die(mysql_error());
+
     return $query;
 }
 
 function transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId) {
     $query = mysql_query("UPDATE department SET university_universityId = $transferToSelectedUniversityId WHERE departmentId = $selectedDepartmentId") or die(mysql_error());
+
     return $query;
 }
 
@@ -350,10 +347,60 @@ function getProfessorsUsernames($universityName, $departmentName) {
         $result[$i] = $row['professorUsername'];
         $i++;
     }
+
+    return $result;
+}
+
+function getAllRows($query) {
+    $result = null;
+    $i = 0;
+    while($row = mysql_fetch_array($query)) {
+        $result[$i] = $row;
+        $i++;
+    }
+
+    return $result;
+}
+
+function getProfessors($departmentId) {
+    $query = mysql_query("SELECT * FROM professor WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
+
     return $result;
 }
 
 function addProfessor($username, $password, $departmentId) {
     $query = mysql_query("INSERT INTO professor(professorUsername, professorPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)") or die(mysql_error());
+
     return $query;
 }
+
+function changeProfessor($username, $password, $professorId) {
+    $query = mysql_query("UPDATE professor SET professorUsername = $username, professorPassword = $password WHERE professorId = $professorId") or die(mysql_error());
+
+    return $query;
+}
+
+function changeProfessorUsername($username, $professorId) {
+    $query = mysql_query("UPDATE professor SET professorUsername = '$username' WHERE professorId = $professorId") or die(mysql_error());
+
+    return $query;
+}
+
+function changeProfessorPassword($password, $professorId) {
+    $query = mysql_query("UPDATE professor SET professorPassword = '$password' WHERE professorId = $professorId") or die(mysql_error());
+
+    return $query;
+}
+
+function transferProfessor($professorId, $departmentIdTo) {
+    $query = mysql_query("UPDATE professor SET department_departmentId = $departmentIdTo WHERE professorId = $professorId") or die(mysql_error());
+
+    return $query;
+}
+function removeProfessor($professorId) {
+    $query = mysql_query("DELETE FROM professor WHERE professorId = $professorId") or die(mysql_error());
+
+    return $query;
+}
+
