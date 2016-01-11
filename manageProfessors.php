@@ -23,7 +23,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
     <div class="professor" id="change">
-        <h4>Change Professor Name And Password:</h4>
+        <h4>Change Professor UserName And Password:</h4>
         <form action="" method="post">
             <?php
         if(isLoginAsAdmin()) {

@@ -323,6 +323,43 @@ function reloadPage() {
     header("Refresh:0");
 }
 
+function getSecretaries($departmentId) {
+    $query = mysql_query("SELECT * FROM secretary WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
+
+    return $result;
+}
+
+function addSecretary($username, $password, $departmentId) {
+    $query = mysql_query("INSERT INTO secretary(secretaryUsername, secretaryPassword, department_departmentId) VALUES('$username', '$password', $departmentId)") or die(mysql_error());
+
+    return $query;
+}
+
+function removeSecretaryDepartmentId($departmentId) {
+    $query = mysql_query("DELETE FROM secretary WHERE department_departmentId = $departmentId") or die(mysql_error());
+
+    return $query;
+}
+
+function removeSecretary($secretaryId) {
+    $query = mysql_query("DELETE FROM secretary WHERE secretaryId = $secretaryId") or die(mysql_error());
+
+    return $query;
+}
+
+function changeSecretaryUsername($secretaryId, $username) {
+    $query = mysql_query("UPDATE secretary SET secretaryUsername = '$username' WHERE secretaryId = $secretaryId") or die(mysql_error());
+
+    return $query;
+}
+
+function changeSecretaryPassword($secretaryId, $password) {
+    $query = mysql_query("UPDATE secretary SET secretaryPassword = '$password' WHERE secretaryId = $secretaryId") or die(mysql_error()); //todo
+
+    return $query;
+}
+
 function addDepartment($universityName, $departmentName) {
     $query = mysql_query("INSERT INTO department(departmentName, university_universityId) VALUES('$departmentName',(SELECT universityId FROM university WHERE universityName = '$universityName'))") or die(mysql_error());
 
@@ -335,7 +372,13 @@ function renameDepartment($selectedUniversity, $selectedDepartment, $newDepartme
     return $query;
 }
 
-function removeDepartment($selectedUniversity, $selectedDepartment) {
+function removeDepartment($departmentId) {
+    $query = mysql_query("DELETE FROM department WHERE departmentId = $departmentId") or die(mysql_error());
+
+    return $query;
+}
+
+function removeDepartmentSelectWithUniversityNameAndDepartmentName($selectedUniversity, $selectedDepartment) {
     $query = mysql_query("DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');") or die(mysql_error());
 
     return $query;

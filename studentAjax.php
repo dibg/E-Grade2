@@ -1,51 +1,51 @@
 <script src="jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#selectedUniversityAdd').on('change',function(){
+    $(document).ready(function () {
+        $('#selectedUniversityAdd').on('change', function () {
             var universityName = $(this).val();
-            if(universityName){
+            if (universityName) {
                 $.ajax({
-                    type:'POST',
-                    url:'ajaxSubmit.php',
-                    data:'universityNameAndReturnDepartmentId='+universityName,
-                    success:function(html){
+                    type: 'POST',
+                    url: 'ajaxSubmit.php',
+                    data: 'universityNameAndReturnDepartmentId=' + universityName,
+                    success: function (html) {
                         $('#selectedDepartmentAdd').html(html);
                     }
                 });
-            }else{
+            } else {
                 $('#selectedDepartmentAdd').html('<option value="">Select University First</option>');
             }
         });
 
-        $('#selectedUniversityChange').on('change',function(){
+        $('#selectedUniversityChange').on('change', function () {
             var universityName = $(this).val();
-            if(universityName){
+            if (universityName) {
                 $.ajax({
-                    type:'POST',
-                    url:'ajaxSubmit.php',
-                    data:'universityNameAndReturnDepartmentId='+universityName,
-                    success:function(html){
-                        $('#selectedDepartmentChange').html(html).change(); // generate change event
+                    type: 'POST',
+                    url: 'ajaxSubmit.php',
+                    data: 'universityNameAndReturnDepartmentId=' + universityName,
+                    success: function (html) {
+                        $('#selectedDepartmentChange').html(html).change();
                         $('#selectedProfessorChange').html('<option value="">Select Department First</option>');
                     }
                 });
-            }else{
+            } else {
                 $('#selectedDepartmentChange').html('<option value="">Select University First</option>');
                 $('#selectedProfessorChange').html('<option value="">Select Department First</option>');
             }
         });
-        $('#selectedDepartmentChange').on('change',function(){
+        $('#selectedDepartmentChange').on('change', function () {
             var departmentId = $(this).val();
-            if(departmentId){
+            if (departmentId) {
                 $.ajax({
-                    type:'POST',
-                    url:'ajaxSubmit.php',
-                    data:'departmentId='+departmentId,
-                    success:function(html){
+                    type: 'POST',
+                    url: 'ajaxSubmit.php',
+                    data: 'departmentId=' + departmentId,
+                    success: function (html) {
                         $('#selectedProfessorChange').html(html);
                     }
                 });
-            }else{
+            } else {
                 $('#selectedProfessorChange').html('<option value="">Select Department First</option>');
             }
         });
