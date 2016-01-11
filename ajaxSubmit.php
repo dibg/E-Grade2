@@ -1,7 +1,7 @@
 <?php
 include 'functions.php';
 
-if(isSetAndIsNotNull($_POST['universityName'])){
+if(isSetAndIsNotNull($_POST['universityName'])){ //todo undefined variable
     $universityName = $_POST['universityName'];
     $dep = getDepartmentsNames($universityName);
     echo generateOptions($dep);

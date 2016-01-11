@@ -14,8 +14,6 @@
 </form>
 
 <?php
-    $a = getDepartments('cmit');
-var_dump($a);
     include 'loginHelper.php';
     include 'footer.php';
 ?>

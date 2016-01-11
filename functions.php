@@ -342,7 +342,6 @@ function transferDepartment($selectedDepartmentId, $transferToSelectedUniversity
     return $query;
 }
 
-
 function getProfessorsUsernames($universityName, $departmentName) {
     $query = mysql_query("SELECT professorUsername FROM professor INNER JOIN department ON professor.department_departmentId = department.departmentId INNER JOIN university WHERE universityName = '$universityName' and departmentName = '$departmentName'") or die(mysql_error());
     $result = null;
@@ -354,3 +353,7 @@ function getProfessorsUsernames($universityName, $departmentName) {
     return $result;
 }
 
+function addProfessor($username, $password, $departmentId) {
+    $query = mysql_query("INSERT INTO professor(professorUsername, professorPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)") or die(mysql_error());
+    return $query;
+}
