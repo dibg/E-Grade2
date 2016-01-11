@@ -40,7 +40,7 @@
                 $.ajax({
                     type:'POST',
                     url:'ajaxSubmit.php',
-                    data:'departmentId='+departmentId,
+                    data:'departmentIdAndReturnProfessorId='+departmentId,
                     success:function(html){
                         $('#selectedProfessorChange').html(html);
                     }
@@ -73,7 +73,7 @@
                 $.ajax({
                     type:'POST',
                     url:'ajaxSubmit.php',
-                    data:'departmentId='+departmentId,
+                    data:'departmentIdAndReturnProfessorId='+departmentId,
                     success:function(html){
                         $('#selectedProfessorTransfer').html(html);
                     }
@@ -122,7 +122,7 @@
                 $.ajax({
                     type:'POST',
                     url:'ajaxSubmit.php',
-                    data:'departmentId='+departmentId,
+                    data:'departmentIdAndReturnProfessorId='+departmentId,
                     success:function(html){
                         $('#selectedProfessorRemove').html(html);
                     }

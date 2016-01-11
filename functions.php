@@ -457,7 +457,7 @@ function removeProfessor($professorId) {
 }
 
 function getStudents($departmentId) {
-    $query = mysql_query("SELECT * FROM students WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = mysql_query("SELECT * FROM student WHERE department_departmentId = $departmentId") or die(mysql_error());
     $result = getAllRows($query);
 
     return $result;
@@ -468,5 +468,31 @@ function addStudent($username, $password, $departmentId) {
 
     return $query;
 }
+
+function changeStudentUsername($username, $studentId) {
+    $query = mysql_query("UPDATE student SET studentUsername = '$username' WHERE studentId = $studentId") or die(mysql_error());
+
+    return $query;
+}
+
+function changeStudentPassword($password, $studentId) {
+    $query = mysql_query("UPDATE student SET studentPassword = '$password' WHERE studentId = $studentId") or die(mysql_error());
+
+    return $query;
+}
+
+function removeStudent($studentId) {
+    $query = mysql_query("DELETE FROM student WHERE studentId = $studentId") or die(mysql_error());
+
+    return $query;
+}
+
+function transferStudent($studentId, $departmentIdTo) {
+    $query = mysql_query("UPDATE student SET department_departmentId = $departmentIdTo WHERE studentId = $studentId") or die(mysql_error());
+
+    return $query;
+
+}
+
 
 

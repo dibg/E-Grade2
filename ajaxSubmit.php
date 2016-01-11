@@ -18,7 +18,7 @@ if (isSetAndIsNotNull($_POST)) {
                     echo generateOptionsWithSpecifiedValueField($dep, 'departmentId', 'departmentName');
                 }
                 break;
-            case 'departmentId':
+            case 'departmentIdAndReturnProfessorId':
                 if (isSetAndIsNotNull($_POST[$key])) {
                     $departmentId = $_POST[$key];
                     $pro = getProfessors($departmentId);
@@ -30,6 +30,13 @@ if (isSetAndIsNotNull($_POST)) {
                     $departmentId = $_POST[$key];
                     $sec = getSecretaries($departmentId);
                     echo generateOptionsWithSpecifiedValueField($sec, 'secretaryId', 'secretaryUsername');
+                }
+                break;
+            case 'departmentIdAndReturnStudentId':
+                if (isSetAndIsNotNull($_POST[$key])) {
+                    $departmentId = $_POST[$key];
+                    $stu = getStudents($departmentId);
+                    echo generateOptionsWithSpecifiedValueField($stu, 'studentId', 'studentUsername');
                 }
                 break;
         }

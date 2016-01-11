@@ -58,7 +58,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
             <input type="submit" name="submit" value="transfer">
         </form>
         <?php
-                }
+            }
         ?>
     </div>
 
@@ -99,7 +99,6 @@ if(isSetAndIsNotNull($_POST)){
                 if(isSetAndIsNotNull($_POST['professorUsername'])){
                     $professorUsername = $_POST['professorUsername'];
                     changeProfessorUsername($professorUsername, $professorId);
-
                 }
 
                 if(isSetAndIsNotNull($_POST['professorPassword'])){

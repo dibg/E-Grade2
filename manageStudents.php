@@ -35,9 +35,47 @@
                 echo generateDropDownListWithSpecifiedValueKey(getStudents($departmentId), 'selectedStudentId', 'selectedStudentChange', 'studentId', 'studentUsername');
             }
             ?>
-            <input type="text" name="professorUsername" placeholder="Professor Username"><br>
-            <input type="text" name="professorPassword" placeholder="Professor Password"><br>
+            <input type="text" name="studentUsername" placeholder="Student Username"><br>
+            <input type="text" name="studentPassword" placeholder="Student Password"><br>
             <input type="submit" name="submit" value="change">
+        </form>
+    </div>
+
+    <div class="student" id="transfer">
+        <?php
+        if(isLoginAsAdmin()) {
+            ?>
+            <h4>Transfer Student University And Department:</h4>
+            <form action="" method="post">
+                <?php
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
+                echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentTransfer');
+                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentTransfer');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversityTo', 'selectedUniversityTransferTo');
+                echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentIdTo', 'selectedDepartmentTransferTo');
+                ?>
+                <input type="submit" name="submit" value="transfer">
+            </form>
+            <?php
+        }
+        ?>
+    </div>
+
+    <div class="student" id="remove">
+        <h4>Remove Student:</h4>
+        <form action="" method="post">
+            <?php
+            if(isLoginAsAdmin()) {
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRemove');
+                echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentRemove');
+                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentRemove');
+            } else if(isLoginAsSecretary()) {
+                $departmentId = $_SESSION["departmentId"];
+                echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+                echo generateDropDownListWithSpecifiedValueKey(getStudents($departmentId), 'selectedStudentId', 'selectedStudentRemove', 'studentId', 'studentUsername');
+            }
+            ?>
+            <input type="submit" name="submit" class="warningButton" value="remove">
         </form>
     </div>
 
@@ -55,31 +93,30 @@ if(isSetAndIsNotNull($_POST)){
                 addStudent($studentUsername, $studentPassword, $departmentId);
             }
         } else if ($submit == 'change') {
-            if (isSetAndIsNotNull($_POST['selectedProfessorId'])) {
-                $professorId = $_POST['selectedProfessorId'];
-                if(isSetAndIsNotNull($_POST['professorUsername'])){
-                    $professorUsername = $_POST['professorUsername'];
-                    changeProfessorUsername($professorUsername, $professorId);
-
+            if (isSetAndIsNotNull($_POST['selectedStudentId'])) {
+                $studentId = $_POST['selectedStudentId'];
+                if(isSetAndIsNotNull($_POST['studentUsername'])){
+                    $studentUsername = $_POST['studentUsername'];
+                    changestudentUsername($studentUsername, $studentId);
                 }
 
-                if(isSetAndIsNotNull($_POST['professorPassword'])){
-                    $professorPassword = $_POST['professorPassword'];
-                    changeProfessorPassword($professorPassword, $professorId);
+                if(isSetAndIsNotNull($_POST['studentPassword'])){
+                    $studentPassword = $_POST['studentPassword'];
+                    changestudentPassword($studentPassword, $studentId);
                 }
             }
         } else if ($submit == 'transfer') {
-            if (isSetAndIsNotNull($_POST['selectedProfessorId']) && isSetAndIsNotNull($_POST['selectedDepartmentIdTo'])) {
-                $professorId = $_POST['selectedProfessorId'];
+            if (isSetAndIsNotNull($_POST['selectedStudentId']) && isSetAndIsNotNull($_POST['selectedDepartmentIdTo'])) {
+                $studentId = $_POST['selectedStudentId'];
                 $departmentIdTo = $_POST['selectedDepartmentIdTo'];
 
-                transferProfessor($professorId, $departmentIdTo);
+                transferStudent($studentId, $departmentIdTo);
             }
         } else if ($submit == 'remove') {
-            if (isSetAndIsNotNull($_POST['selectedProfessorId'])) {
-                $professorId = $_POST['selectedProfessorId'];
+            if (isSetAndIsNotNull($_POST['selectedStudentId'])) {
+                $studentId = $_POST['selectedStudentId'];
 
-                removeProfessor($professorId);
+                removeStudent($studentId);
             }
         }
     }
