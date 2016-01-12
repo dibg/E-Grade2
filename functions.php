@@ -135,7 +135,7 @@ function getStudentGrades($username) {
 
     while($row = mysql_fetch_assoc($query)) {
         $result[$i]['course'] = $row['courseName'];
-        $result[$i]['grade'] = $row['grade'];
+        $result[$i]['gradeVal'] = $row['gradeVal'];
         $i++;
     }
 
@@ -148,7 +148,7 @@ function getTableWithStudentGrades($username) {
     if(isset($grades) && $grades != null){
         foreach($grades as $i => $obj) {
             $course = $obj['course'];
-            $grade = $obj['grade'];
+            $grade = $obj['gradeVal'];
 
             $output .= "<tr><td>$course</td><td>$grade</td></tr>";
         }
@@ -561,6 +561,35 @@ function renameClass($className, $classId) {
     return $query;
 }
 
+function getGrades($departmentId) {
+    $query = mysql_query("SELECT * FROM grade WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
 
+    return $result;
+}
+
+function addGrade($gradeName, $departmentId) {
+    $query = mysql_query("INSERT INTO grade(gradeName, department_departmentId) VALUES ('$gradeName', '$departmentId')") or die(mysql_error());
+
+    return $query;
+}
+
+function removeGrade($gradeId) {
+    $query = mysql_query("DELETE FROM grade WHERE gradeId = $gradeId") or die(mysql_error());
+
+    return $query;
+}
+
+function changeGrade($gradeName, $gradeId) {
+    $query = mysql_query("UPDATE grade SET gradeName = '$gradeName' WHERE gradeId = $gradeId") or die(mysql_error());
+
+    return $query;
+}
+
+function transferGrade($gradeId, $departmentIdTo) {
+    $query = mysql_query("UPDATE grade SET department_departmentId = $departmentIdTo WHERE gradeId = $gradeId") or die(mysql_error());
+
+    return $query;
+}
 
 

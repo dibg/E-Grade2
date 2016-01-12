@@ -24,6 +24,7 @@ body{
     max-width: 1220px;
     margin: auto !important;
     float: none !important;
+    /*background-color: #333;*/
 }
 
 /* ---------------------- class ---------------------- */
@@ -174,7 +175,9 @@ li a:hover {
 /* ---------------------- table ---------------------- */
 table {
     border-collapse: collapse;
-    width: 50%;
+    width: 400px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 th, td {

@@ -91,7 +91,7 @@
                     url:'ajaxSubmit.php',
                     data:'universityNameAndReturnDepartmentId='+universityName,
                     success:function(html){
-                        $('#selectedDepartmentTransfer').html(html).change(); // generate change event
+                        $('#selectedDepartmentTransfer').html(html).change();
                         $('#selectedCourseTransfer').html('<option value="">Select Department First</option>');
                     }
                 });

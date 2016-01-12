@@ -25,7 +25,7 @@
                     url:'ajaxSubmit.php',
                     data:'universityNameAndReturnDepartmentId='+universityName,
                     success:function(html){
-                        $('#selectedDepartmentChange').html(html).change(); // generate change event
+                        $('#selectedDepartmentChange').html(html).change();
                         $('#selectedProfessorChange').html('<option value="">Select Department First</option>');
                     }
                 });
@@ -58,7 +58,7 @@
                     url:'ajaxSubmit.php',
                     data:'universityNameAndReturnDepartmentId='+universityName,
                     success:function(html){
-                        $('#selectedDepartmentTransfer').html(html).change(); // generate change event
+                        $('#selectedDepartmentTransfer').html(html).change();
                         $('#selectedProfessorTransfer').html('<option value="">Select Department First</option>');
                     }
                 });
@@ -107,7 +107,7 @@
                     url:'ajaxSubmit.php',
                     data:'universityNameAndReturnDepartmentId='+universityName,
                     success:function(html){
-                        $('#selectedDepartmentRemove').html(html).change(); // generate change event
+                        $('#selectedDepartmentRemove').html(html).change();
                         $('#selectedProfessorRemove').html('<option value="">Select Department First</option>');
                     }
                 });

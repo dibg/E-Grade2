@@ -25,7 +25,7 @@
                     url:'ajaxSubmit.php',
                     data:'universityNameAndReturnDepartmentId='+universityName,
                     success:function(html){
-                        $('#selectedDepartmentProAdd').html(html).change(); // generate change event
+                        $('#selectedDepartmentProAdd').html(html).change();
                         $('#selectedProfessorProAdd').html('<option value="">Select Department First</option>');
                     }
                 });
@@ -146,55 +146,6 @@
                 });
             }else{
                 $('#selectedClassRemove').html('<option value="">Select Department First</option>');
-            }
-        });
-
-        $('#selectedUniversityTransfer').on('change',function(){
-            var universityName = $(this).val();
-            if(universityName){
-                $.ajax({
-                    type:'POST',
-                    url:'ajaxSubmit.php',
-                    data:'universityNameAndReturnDepartmentId='+universityName,
-                    success:function(html){
-                        $('#selectedDepartmentTransfer').html(html).change(); // generate change event
-                        $('#selectedClassTransfer').html('<option value="">Select Department First</option>');
-                    }
-                });
-            }else{
-                $('#selectedDepartmentTransfer').html('<option value="">Select University First</option>');
-                $('#selectedClassTransfer').html('<option value="">Select Department First</option>');
-            }
-        });
-        $('#selectedDepartmentTransfer').on('change',function(){
-            var departmentId = $(this).val();
-            if(departmentId){
-                $.ajax({
-                    type:'POST',
-                    url:'ajaxSubmit.php',
-                    data:'departmentIdAndReturnClassId='+departmentId,
-                    success:function(html){
-                        $('#selectedClassTransfer').html(html);
-                    }
-                });
-            }else{
-                $('#selectedClassTransfer').html('<option value="">Select Department First</option>');
-            }
-        });
-
-        $('#selectedUniversityTransferTo').on('change',function(){
-            var universityName = $(this).val();
-            if(universityName){
-                $.ajax({
-                    type:'POST',
-                    url:'ajaxSubmit.php',
-                    data:'universityNameAndReturnDepartmentId='+universityName,
-                    success:function(html){
-                        $('#selectedDepartmentTransferTo').html(html);
-                    }
-                });
-            }else{
-                $('#selectedDepartmentTransferTo').html('<option value="">Select University First</option>');
             }
         });
 
