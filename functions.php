@@ -568,8 +568,8 @@ function getGrades($departmentId) {
     return $result;
 }
 
-function addGrade($gradeName, $departmentId) {
-    $query = mysql_query("INSERT INTO grade(gradeName, department_departmentId) VALUES ('$gradeName', '$departmentId')") or die(mysql_error());
+function addGrade($gradeVal, $studentId, $courseId) {
+    $query = mysql_query("INSERT INTO grade(gradeVal, student_studentId, course_courseId) VALUES ('$gradeVal', '$studentId', $courseId)") or die(mysql_error());
 
     return $query;
 }
@@ -580,16 +580,23 @@ function removeGrade($gradeId) {
     return $query;
 }
 
-function changeGrade($gradeName, $gradeId) {
-    $query = mysql_query("UPDATE grade SET gradeName = '$gradeName' WHERE gradeId = $gradeId") or die(mysql_error());
+function changeGrade($gradeVal, $gradeId) {
+    $query = mysql_query("UPDATE grade SET gradeVal = '$gradeVal' WHERE gradeId = $gradeId") or die(mysql_error());
 
     return $query;
 }
 
-function transferGrade($gradeId, $departmentIdTo) {
-    $query = mysql_query("UPDATE grade SET department_departmentId = $departmentIdTo WHERE gradeId = $gradeId") or die(mysql_error());
+function getCoursesThatNotHaveGradeTheStudent($departmentId, $studentId) {
+    $query = mysql_query("SELECT * FROM course WHERE courseId NOT IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
 
-    return $query;
+    return $result;
 }
 
+function getCoursesThatHaveGradeTheStudent($departmentId, $studentId) {
+    $query = mysql_query("SELECT * FROM course WHERE courseId IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
+
+    return $result;
+}
 

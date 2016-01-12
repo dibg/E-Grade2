@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `class` WRITE;
 /*!40000 ALTER TABLE `class` DISABLE KEYS */;
-INSERT INTO `class` VALUES (1,1,1,1,'Algebra 101'),(2,2,2,1,'C++ 101'),(3,3,2,2,'Calculus 202');
+INSERT INTO `class` VALUES (1,1,1,1,'Algebra 101'),(2,2,2,1,'C++ 101'),(3,4,2,2,'Calculus 202');
 /*!40000 ALTER TABLE `class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `class_has_student` WRITE;
 /*!40000 ALTER TABLE `class_has_student` DISABLE KEYS */;
-INSERT INTO `class_has_student` VALUES (1,1),(2,1),(3,1),(1,2),(1,3),(2,3),(3,5);
+INSERT INTO `class_has_student` VALUES (1,1),(2,1),(1,2),(1,3),(2,3),(3,5);
 /*!40000 ALTER TABLE `class_has_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-12  3:53:36
+-- Dump completed on 2016-01-12 22:49:18

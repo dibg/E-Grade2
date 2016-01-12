@@ -13,6 +13,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityAdd');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentAdd');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentAdd');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
@@ -30,7 +31,9 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityChange');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
-                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedGradeId', 'selectedGradeChange');
+                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentChange');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseChange');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChange');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
@@ -68,14 +71,15 @@ if(isSetAndIsNotNull($_POST)){
         $submit = $_POST['submit'];
 
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['gradeValue'])&& isSetAndIsNotNull($_POST['selectedDepartmentId'])) {
-                $departmentId = $_POST['selectedDepartmentId'];
+            if (isSetAndIsNotNull($_POST['selectedStudentId']) && isSetAndIsNotNull($_POST['gradeValue']) && isSetAndIsNotNull($_POST['selectedCourseId'])) {
+                $studentId = $_POST['selectedStudentId'];
                 $gradeValue = $_POST['gradeValue'];
+                $courseId = $_POST['selectedCourseId'];
 
-                addGrade($gradeValue, $departmentId);
+                addGrade($gradeValue, $studentId, $courseId);
             }
         } else if ($submit == 'change') {
-            if (isSetAndIsNotNull($_POST['selectedGradeId'])) {
+            if (isSetAndIsNotNull($_POST['selectedGradeId']) && isSetAndIsNotNull($_POST['gradeValue'])) {
                 $gradeId = $_POST['selectedGradeId'];
                 if(isSetAndIsNotNull($_POST['gradeValue'])){
                     $gradeValue = $_POST['gradeValue'];

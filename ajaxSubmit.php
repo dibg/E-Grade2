@@ -60,6 +60,22 @@ if (isSetAndIsNotNull($_POST)) {
                     echo generateOptionsWithSpecifiedValueField($gra, 'gradeId', 'gradeVal');
                 }
                 break;
+            case 'studentIdAndReturnCourseIdThatNotHaveGrade':
+                if (isSetAndIsNotNull($_POST[$key])) {
+                    $studentId = $_POST[$key];
+                    $departmentId = $_POST['departmentIdAndReturnCourseIdThatNotHaveGrade'];
+                    $cou = getCoursesThatNotHaveGradeTheStudent($departmentId, $studentId);
+                    echo generateOptionsWithSpecifiedValueField($cou, 'courseId', 'courseName');
+                }
+                break;
+            case 'studentIdAndReturnCourseIdThatHaveGrade':
+                if (isSetAndIsNotNull($_POST[$key])) {
+                    $studentId = $_POST[$key];
+                    $departmentId = $_POST['departmentIdAndReturnCourseIdThatHaveGrade'];
+                    $cou = getCoursesThatHaveGradeTheStudent($departmentId, $studentId);
+                    echo generateOptionsWithSpecifiedValueField($cou, 'courseId', 'courseName');
+                }
+                break;
 
         }
     }
