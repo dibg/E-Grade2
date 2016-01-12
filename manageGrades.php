@@ -5,3 +5,4 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
 
 include 'footer.php';
 ?>
+

@@ -522,6 +522,45 @@ function transferCourse($courseId, $departmentIdTo) {
     $query = mysql_query("UPDATE course SET department_departmentId = $departmentIdTo WHERE courseId = $courseId") or die(mysql_error());
 
     return $query;
-
 }
+
+function getClasses($departmentId) {
+    $query = mysql_query("SELECT * FROM class WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
+
+    return $result;
+}
+
+function addClass($className, $departmentId, $professorId, $courseId) {
+    $query = mysql_query("INSERT INTO class(className, department_departmentId, professor_professorId, course_courseId) VALUES ('$className', '$departmentId', '$professorId', '$courseId')") or die(mysql_error());
+
+    return $query;
+}
+
+function assignClassProfessor($classId, $professorId) {
+    $query = mysql_query("UPDATE class SET professor_professorId = '$professorId' WHERE classId = $classId") or die(mysql_error());
+
+    return $query;
+}
+
+function assignClassCourse($classId, $courseId) {
+    $query = mysql_query("UPDATE class SET course_courseId = '$courseId' WHERE classId = $classId") or die(mysql_error());
+
+    return $query;
+}
+
+function removeClass($classId) {
+    $query = mysql_query("DELETE FROM class WHERE classId = $classId") or die(mysql_error());
+
+    return $query;
+}
+
+function renameClass($className, $classId) {
+    $query = mysql_query("UPDATE class SET className = '$className' WHERE classId = $classId") or die(mysql_error());
+
+    return $query;
+}
+
+
+
 

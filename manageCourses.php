@@ -4,7 +4,7 @@ include 'coursesAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 
-<div class="courses" id="add">
+<div class="course" id="add">
     <h4>Add Course:</h4>
     <form action="" method="post">
         <?php
