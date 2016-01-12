@@ -1,4 +1,3 @@
-<script src="jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#selectedUniversityAdd').on('change',function(){

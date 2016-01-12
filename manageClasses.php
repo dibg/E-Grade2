@@ -4,9 +4,9 @@ include 'classesAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 
-<div class="dataForm">
+<div class="formContainer">
     <div class="class" id="add">
-        <h4>Add Class:</h4>
+        <h4>Add Class</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -31,7 +31,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
     <div class="class" id="rename">
-        <h4>Rename Class:</h4>
+        <h4>Rename Class</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -51,7 +51,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 
 
     <div class="class" id="remove">
-        <h4>Remove Class:</h4>
+        <h4>Remove Class</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {

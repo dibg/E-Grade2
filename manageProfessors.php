@@ -4,9 +4,9 @@ include 'professorAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 
-<div class="dataForm">
+<div class="formContainer">
     <div class="professor" id="add">
-        <h4>Add Professor:</h4>
+        <h4>Add Professor</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -24,7 +24,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
     <div class="professor" id="change">
-        <h4>Change Professor UserName And Password:</h4>
+        <h4>Change Professor UserName And Password</h4>
         <form action="" method="post">
             <?php
         if(isLoginAsAdmin()) {
@@ -47,7 +47,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
         <?php
             if(isLoginAsAdmin()) {
         ?>
-        <h4>Transfer Professor University And Department:</h4>
+        <h4>Transfer Professor University And Department</h4>
         <form action="" method="post">
             <?php
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
@@ -64,7 +64,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
     <div class="professor" id="remove">
-        <h4>Remove Professor:</h4>
+        <h4>Remove Professor</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {

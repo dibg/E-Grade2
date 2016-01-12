@@ -4,9 +4,9 @@ include 'coursesAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 
-<div class="dataForm">
+<div class="formContainer">
     <div class="course" id="add">
-        <h4>Add Course:</h4>
+        <h4>Add Course</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -23,7 +23,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
     <div class="course" id="rename">
-        <h4>Rename Course:</h4>
+        <h4>Rename Course</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -45,7 +45,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
         <?php
         if(isLoginAsAdmin()) {
             ?>
-            <h4>Transfer Course University And Department:</h4>
+            <h4>Transfer Course University And Department</h4>
             <form action="" method="post">
                 <?php
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
@@ -62,7 +62,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
     <div class="course" id="remove">
-        <h4>Remove Course:</h4>
+        <h4>Remove Course</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {

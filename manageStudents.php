@@ -3,9 +3,9 @@
     include 'studentAjax.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
-<div class="dataForm">
+<div class="formContainer">
     <div class="student" id="add">
-        <h4>Add Student:</h4>
+        <h4>Add Student</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -23,7 +23,7 @@
     </div>
 
     <div class="student" id="change">
-        <h4>Change Student Name And Password:</h4>
+        <h4>Change Student Name And Password</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -46,7 +46,7 @@
         <?php
         if(isLoginAsAdmin()) {
             ?>
-            <h4>Transfer Student University And Department:</h4>
+            <h4>Transfer Student University And Department</h4>
             <form action="" method="post">
                 <?php
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
@@ -63,7 +63,7 @@
     </div>
 
     <div class="student" id="remove">
-        <h4>Remove Student:</h4>
+        <h4>Remove Student</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {

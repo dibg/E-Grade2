@@ -4,9 +4,9 @@ include 'gradesAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFESSOR"));
 ?>
 
-<div class="dataForm">
+<div class="formContainer">
     <div class="grade" id="add">
-        <h4>Add Grade:</h4>
+        <h4>Add Grade</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -24,7 +24,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
     </div>
 
     <div class="grade" id="change">
-        <h4>Change Grade:</h4>
+        <h4>Change Grade</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
@@ -43,7 +43,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
     </div>
 
     <div class="grade" id="remove">
-        <h4>Remove Grade:</h4>
+        <h4>Remove Grade</h4>
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {

@@ -4,9 +4,9 @@
 //echo getTableWithAllUniversities();
 //echo getTableWithAllDepartments("cmit");
 ?>
-<div class="dataForm">
+<div class="formContainer">
     <div class="university" id="add">
-        <h4>Add University:</h4>
+        <h4>Add University</h4>
         <form action="" method="post">
             <input type="text" name="universityName" placeholder="University Name"><br>
             <input type="submit" name="submit" value="add">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="university" id="rename">
-        <h4>Rename University:</h4>
+        <h4>Rename University</h4>
         <form action="" method="post">
             <?php
             $uni = getAllUniversitiesNames();
@@ -26,7 +26,7 @@
     </div>
 
     <div class="university" id="remove">
-        <h4>Remove University:</h4>
+        <h4>Remove University</h4>
         <form action="" method="post">
             <?php
         $uni = getAllUniversitiesNames();

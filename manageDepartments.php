@@ -3,9 +3,9 @@ include 'header.php';
 include 'departmentAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
-<div class="dataForm">
+<div class="formContainer">
     <div class="department" id="add">
-        <h4>Add Department: </h4>
+        <h4>Add Department </h4>
         <form action="" method="post">
             <?php
             $uni = getAllUniversitiesNames();
@@ -19,7 +19,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     </div>
 
     <div class="department" id="rename">
-        <h4>Rename Department: </h4>
+        <h4>Rename Department </h4>
         <form action="" method="post">
             <?php
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRename');
@@ -31,7 +31,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     </div>
 
     <div class="department" id="change">
-        <h4>Change Secretary Username And Password: </h4>
+        <h4>Change Secretary Username And Password </h4>
         <form action="" method="post">
             <?php
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityChange');
@@ -45,7 +45,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     </div>
 
     <div class="department" id="transfer">
-        <h4>Transfer Department: </h4>
+        <h4>Transfer Department </h4>
         <form action="" method="post">
             <?php
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
@@ -57,7 +57,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
     </div>
 
     <div class="department" id="remove">
-        <h4>Remove Department: </h4>
+        <h4>Remove Department </h4>
         <form action="" method="post">
             <?php
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityDelete');
