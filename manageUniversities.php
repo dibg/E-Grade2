@@ -4,7 +4,7 @@
 //echo getTableWithAllUniversities();
 //echo getTableWithAllDepartments("cmit");
 ?>
-
+<div class="dataForm">
     <div class="university" id="add">
         <h4>Add University:</h4>
         <form action="" method="post">
@@ -34,6 +34,7 @@
         ?>
             <input type="submit" name="submit" class="warningButton" value="remove">
         </form>
+    </div>
     </div>
 
 

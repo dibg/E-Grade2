@@ -75,7 +75,12 @@ body{
 }
 /* ---------------------- divs ---------------------- */
 /*add div style here*/
-
+.dataForm {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-right: 5%;
+    padding-left: 5%;
+}
 
 /* ---------------------- buttons ---------------------- */
 

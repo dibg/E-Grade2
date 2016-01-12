@@ -4,6 +4,7 @@ include 'professorAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 
+<div class="dataForm">
     <div class="professor" id="add">
         <h4>Add Professor:</h4>
         <form action="" method="post">
@@ -78,6 +79,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
             ?>
             <input type="submit" name="submit" class="warningButton" value="remove">
         </form>
+    </div>
     </div>
 
 <?php

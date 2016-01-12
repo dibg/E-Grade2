@@ -3,6 +3,7 @@
     include 'studentAjax.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
+<div class="dataForm">
     <div class="student" id="add">
         <h4>Add Student:</h4>
         <form action="" method="post">
@@ -78,6 +79,7 @@
             <input type="submit" name="submit" class="warningButton" value="remove">
         </form>
     </div>
+</div>
 
 <?php
 if(isSetAndIsNotNull($_POST)){
