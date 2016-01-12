@@ -1,8 +1,8 @@
 <?php
 include 'header.php';
-include 'gradesAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFESSOR"));
 ?>
+<script src="gradesAjax.js"></script>
 
 <div class="formContainer">
     <div class="grade" id="add">

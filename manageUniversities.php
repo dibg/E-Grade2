@@ -1,8 +1,8 @@
 <?php
     include 'header.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
-//echo getTableWithAllUniversities();
-//echo getTableWithAllDepartments("cmit");
+    //echo getTableWithAllUniversities();
+    //echo getTableWithAllDepartments("cmit");
 ?>
 <div class="formContainer">
     <div class="university" id="add">

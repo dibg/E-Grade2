@@ -1,8 +1,9 @@
 <?php
 include 'header.php';
-include 'departmentAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
+<script src="departmentAjax.js"></script>
+
 <div class="formContainer">
     <div class="department" id="add">
         <h4>Add Department </h4>

@@ -1,8 +1,8 @@
 <?php
 include 'header.php';
-include 'coursesAjax.php';
 checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
+<script src="coursesAjax.js"></script>
 
 <div class="formContainer">
     <div class="course" id="add">
