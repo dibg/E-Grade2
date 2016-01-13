@@ -42,7 +42,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseChange');
-                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChangeSec');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChange');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' id='selectedDepartmentChange' name='selectedDepartmentId' value='$departmentId'>";
