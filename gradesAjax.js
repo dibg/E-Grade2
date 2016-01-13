@@ -61,11 +61,11 @@ $(document).ready(function(){
                 url:'ajaxSubmit.php',
                 data: {studentIdAndReturnCourseIdThatNotHaveGrade: studentId, departmentIdAndReturnCourseIdThatNotHaveGrade: departmentId},
                 success: function (html) {
-                    $('#selectedCourseAdd').html(html);
+                    $('#selectedCourseAddSec').html(html);
                 }
             });
         }else{
-            $('#selectedCourseAdd').html('<option value="">Select Student</option>');
+            $('#selectedCourseAddSec').html('<option value="">Select Student First</option>');
         }
     });
 
@@ -79,28 +79,28 @@ $(document).ready(function(){
                 data: {studentIdAndReturnCourseIdThatHaveGrade: studentId, departmentIdAndReturnCourseIdThatHaveGrade: departmentId},
                 success: function (html) {
                     $('#selectedCourseChangeSec').html(html).change();
-                    $('#selectedGradeChange').html('<option value="">Select Course First</option>');
+                    $('#selectedGradeChangeSec').html('<option value="">Select Course First</option>');
                 }
             });
         }else{
-            $('#selectedCourseChange').html('<option value="">Select Student</option>');
-            $('#selectedGradeChange').html('<option value="">Select Course First</option>');
+            $('#selectedCourseChangeSec').html('<option value="">Select Student First</option>');
+            $('#selectedGradeChangeSec').html('<option value="">Select Course First</option>');
         }
     });
     $('#selectedCourseChangeSec').on('change',function(){
-        var studentId = $(this).val();
-        var courseId =  $('#selectedStudentChangeSec').val();
+        var courseId =  $(this).val();
+        var studentId = $('#selectedStudentChangeSec').val();
         if(studentId){
             $.ajax({
                 type:'POST',
                 url:'ajaxSubmit.php',
                 data: {studentIdAndReturnGradeId: studentId, courseIdAndReturnGradeId2: courseId},
                 success: function (html) {
-                    $('#selectedGradeChange').html(html);
+                    $('#selectedGradeChangeSec').html(html);
                 }
             });
         }else{
-            $('#selectedGradeChange').html('<option value="">Select Course First</option>');
+            $('#selectedGradeChangeSec').html('<option value="">Select Course First</option>');
         }
     });
 
@@ -114,31 +114,30 @@ $(document).ready(function(){
                 data: {studentIdAndReturnCourseIdThatHaveGrade: studentId, departmentIdAndReturnCourseIdThatHaveGrade: departmentId},
                 success: function (html) {
                     $('#selectedCourseRemoveSec').html(html).change();
-                    $('#selectedGradeRemove').html('<option value="">Select Course First</option>');
+                    $('#selectedGradeRemoveSec').html('<option value="">Select Course First</option>');
                 }
             });
         }else{
-            $('#selectedCourseRemove').html('<option value="">Select Student</option>');
-            $('#selectedGradeRemove').html('<option value="">Select Course First</option>');
+            $('#selectedCourseRemoveSec').html('<option value="">Select Student First</option>');
+            $('#selectedGradeRemoveSec').html('<option value="">Select Course First</option>');
         }
     });
     $('#selectedCourseRemoveSec').on('change',function(){
-        var studentId = $(this).val();
-        var courseId =  $('#selectedStudentRemoveSec').val();
+        var courseId =  $(this).val();
+        var studentId = $('#selectedStudentRemoveSec').val();
         if(studentId){
             $.ajax({
                 type:'POST',
                 url:'ajaxSubmit.php',
                 data: {studentIdAndReturnGradeId: studentId, courseIdAndReturnGradeId2: courseId},
                 success: function (html) {
-                    $('#selectedGradeRemove').html(html);
+                    $('#selectedGradeRemoveSec').html(html);
                 }
             });
         }else{
-            $('#selectedGradeRemove').html('<option value="">Select Course First</option>');
+            $('#selectedGradeRemoveSec').html('<option value="">Select Course First</option>');
         }
     });
-
 
     $('#selectedUniversityChange').on('change',function(){
         var universityName = $(this).val();

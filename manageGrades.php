@@ -18,12 +18,12 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' id='selectedDepartmentAdd' name='selectedDepartmentId' value='$departmentId'>";
                 echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentAddSec', 'studentId', 'studentUsername');
-                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAddSec');
             } else if(isLoginAsProfessor()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' id='selectedDepartmentAdd' name='selectedDepartmentId' value='$departmentId'>";
                 echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentAddSec', 'studentId', 'studentUsername');
-                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAddSec');
             }
             ?>
             <input type="text" name="gradeValue" placeholder="Grade Value"><br>
@@ -42,13 +42,13 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseChange');
-                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChange');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChangeSec');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' id='selectedDepartmentChange' name='selectedDepartmentId' value='$departmentId'>";
                 echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentChangeSec', 'studentId', 'studentUsername');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseChangeSec');
-                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChange');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChangeSec');
             }
             ?>
             <input type="text" name="gradeValue" placeholder="New Grade Value"><br>
@@ -71,7 +71,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 echo "<input type='hidden' id='selectedDepartmentRemove' name='selectedDepartmentId' value='$departmentId'>";
                 echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentRemoveSec', 'studentId', 'studentUsername');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseRemoveSec');
-                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeRemove');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeRemoveSec');
             }
             ?>
             <input type="submit" name="submit" class="warningButton" value="remove">
