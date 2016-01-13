@@ -10,7 +10,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityAdd');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityAdd');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentAdd');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentAdd');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
@@ -38,7 +38,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityChange');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityChange');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseChange');
@@ -61,7 +61,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRemove');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityRemove');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentRemove');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentRemove');
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseRemove');
@@ -86,7 +86,6 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
 if(isSetAndIsNotNull($_POST)){
     if (isSetAndIsNotNull($_POST['submit'])) {
         $submit = $_POST['submit'];
-        //var_dump($_POST);
         if ($submit == 'add') {
             if (isSetAndIsNotNull($_POST['selectedStudentId']) && isSetAndIsNotNull($_POST['gradeValue']) && isSetAndIsNotNull($_POST['selectedCourseId'])) {
                 $studentId = $_POST['selectedStudentId'];

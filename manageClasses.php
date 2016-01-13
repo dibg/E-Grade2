@@ -10,7 +10,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityAdd');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityAdd');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentAdd');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorAdd');
                 echo generateDropDownListWithFirstOption(null, "Select Professor First", 'selectedCourseId', 'selectedCourseAdd');
@@ -31,7 +31,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityChange');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityChange');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedClassId', 'selectedClassChange');
             } else if(isLoginAsSecretary()) {
@@ -51,7 +51,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
         <form action="" method="post">
             <?php
             if(isLoginAsAdmin()) {
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRemove');
+                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityRemove');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentRemove');
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedClassId', 'selectedClassRemove');
             } else if(isLoginAsSecretary()) {

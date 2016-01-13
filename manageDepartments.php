@@ -23,7 +23,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
         <h4>Rename Department </h4>
         <form action="" method="post">
             <?php
-            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRename');
+            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityRename');
             echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartment', 'selectedDepartmentRename');
             ?>
             <input type="text" name="departmentName" placeholder="Department Name"><br>
@@ -35,7 +35,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
         <h4>Change Secretary Username And Password </h4>
         <form action="" method="post">
             <?php
-            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityChange');
+            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityChange');
             echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentChange');
             echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedSecretaryId', 'selectedSecretaryChange');
             ?>
@@ -49,7 +49,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
         <h4>Transfer Department </h4>
         <form action="" method="post">
             <?php
-            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityTransfer');
+            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityTransfer');
             echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentTransferId');
             echo generateDropDownListWithSpecifiedValueKey(getAllUniversities(), 'transferToSelectedUniversityId', 'transferToSelectedUniversityId', 'universityId', 'universityName')
             ?>
@@ -61,7 +61,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
         <h4>Remove Department </h4>
         <form action="" method="post">
             <?php
-            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityDelete');
+            echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityDelete');
             echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentDelete');
         ?>
             <input type="submit" name="submit" class="warningButton" value="remove">

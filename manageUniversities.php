@@ -1,9 +1,9 @@
 <?php
     include 'header.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
-    //echo getTableWithAllUniversities();
-    //echo getTableWithAllDepartments("cmit");
 ?>
+<script src="universityAjax.js"></script>
+
 <div class="formContainer">
     <div class="university" id="add">
         <h4>Add University</h4>
