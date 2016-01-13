@@ -51,7 +51,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'Algebra',1),(3,'Algebra',2),(2,'C++',1),(4,'Calculus',2);
+INSERT INTO `course` VALUES (7,'Accounting',3),(1,'Algebra',1),(3,'Algebra',2),(2,'C++',1),(4,'Calculus',2),(5,'Java',1),(6,'Statistics',2);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Informatics',1),(2,'Mathematics',2);
+INSERT INTO `department` VALUES (1,'Informatics',1),(3,'Managment',1),(2,'Mathematics',2);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `grade` WRITE;
 /*!40000 ALTER TABLE `grade` DISABLE KEYS */;
-INSERT INTO `grade` VALUES (1,8.4,1,1),(2,9,2,1),(3,7.2,1,2),(4,10,2,2),(5,7.4,5,3),(6,8,5,4);
+INSERT INTO `grade` VALUES (1,8.4,1,1),(2,9,2,1),(3,7.2,1,2),(4,10,2,2),(5,7.4,5,3),(6,8,5,4),(7,8,3,5);
 /*!40000 ALTER TABLE `grade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +81,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `professor` WRITE;
 /*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES (1,'professor1','professor1',1),(2,'professor2','professor2',1),(3,'professor3','professor3',2);
+INSERT INTO `professor` VALUES (1,'professor1','professor1',1),(2,'professor2','professor2',1),(3,'professor3','professor3',2),(5,'professor5','professor5',1),(6,'professor6','professor6',3);
 /*!40000 ALTER TABLE `professor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `secretary` WRITE;
 /*!40000 ALTER TABLE `secretary` DISABLE KEYS */;
-INSERT INTO `secretary` VALUES (1,'secretary1','secretary1',1),(2,'secretary2','secretary2',2);
+INSERT INTO `secretary` VALUES (1,'secretary1','secretary1',1),(2,'secretary2','secretary2',2),(3,'secretary3','secretary3',3);
 /*!40000 ALTER TABLE `secretary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'student1','student1',1),(2,'student2','student2',1),(3,'student3','student3',1),(4,'student4','student4',1),(5,'student5','student5',2),(6,'student6','student6',2);
+INSERT INTO `student` VALUES (1,'student1','student1',1),(2,'student2','student2',1),(3,'student3','student3',1),(4,'student4','student4',1),(5,'student5','student5',2),(6,'student6','student6',2),(7,'student7','student7',1),(8,'student8','student8',3);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-12 22:49:18
+-- Dump completed on 2016-01-13 11:04:05
