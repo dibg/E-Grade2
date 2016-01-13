@@ -12,17 +12,13 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityAdd');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentAdd');
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityProAdd');
-                echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentProAdd');
-                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorProAdd');
-                echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityCouAdd');
-                echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentCouAdd');
-                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedCourseId', 'selectedCourseCouAdd');
+                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorAdd');
+                echo generateDropDownListWithFirstOption(null, "Select Professor First", 'selectedCourseId', 'selectedCourseAdd');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
-                echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorAdd', 'professorId', 'professorUsername');
-                echo generateDropDownListWithSpecifiedValueKey(getCourses($departmentId), 'selectedCourseId', 'selectedCourseAdd', 'courseId', 'courseName');
+                echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorAddSec', 'professorId', 'professorUsername');
+                echo generateDropDownListWithSpecifiedValueKey(getCourses($departmentId), 'selectedCourseId', 'selectedCourseAddSec', 'courseId', 'courseName');
             }
             ?>
             <input type="text" name="className" placeholder="Class Name"><br>

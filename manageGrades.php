@@ -16,13 +16,22 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
-                echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+                echo "<input type='hidden' id='selectedDepartmentAdd' name='selectedDepartmentId' value='$departmentId'>";
+                echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentAddSec', 'studentId', 'studentUsername');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
+            } else if(isLoginAsProfessor()) {
+                $departmentId = $_SESSION["departmentId"];
+                echo "<input type='hidden' id='selectedDepartmentAdd' name='selectedDepartmentId' value='$departmentId'>";
+                echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentAddSec', 'studentId', 'studentUsername');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseAdd');
             }
             ?>
             <input type="text" name="gradeValue" placeholder="Grade Value"><br>
             <input type="submit" name="submit" value="add">
         </form>
     </div>
+
+    <?php if(!isLoginAsProfessor()) { ?>
 
     <div class="grade" id="change">
         <h4>Change Grade</h4>
@@ -36,11 +45,13 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
                 echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChange');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
-                echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
-                echo generateDropDownListWithSpecifiedValueKey(getGrades($departmentId), 'selectedGradeId', 'selectedGradeChange', 'gradeId', 'gradeValue');
+                echo "<input type='hidden' id='selectedDepartmentChange' name='selectedDepartmentId' value='$departmentId'>";
+                echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentChangeSec', 'studentId', 'studentUsername');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseChangeSec');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeChange');
             }
             ?>
-            <input type="text" name="gradeValue" placeholder="Grade Value"><br>
+            <input type="text" name="gradeValue" placeholder="New Grade Value"><br>
             <input type="submit" name="submit" value="change">
         </form>
     </div>
@@ -52,16 +63,22 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University First", 'selectedUniversity', 'selectedUniversityRemove');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentRemove');
-                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedGradeId', 'selectedGradeRemove');
+                echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentRemove');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseRemove');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeRemove');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
-                echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
-                echo generateDropDownListWithSpecifiedValueKey(getGrades($departmentId), 'selectedGradeId', 'selectedGradeRemove', 'gradeId', 'gradeValue');
+                echo "<input type='hidden' id='selectedDepartmentRemove' name='selectedDepartmentId' value='$departmentId'>";
+                echo generateDropDownListWithFirstOptionAndSpecifiedValueKey(getStudents($departmentId), "Select Student", 'selectedStudentId', 'selectedStudentRemoveSec', 'studentId', 'studentUsername');
+                echo generateDropDownListWithFirstOption(null, "Select Student First", 'selectedCourseId', 'selectedCourseRemoveSec');
+                echo generateDropDownListWithFirstOption(null, "Select Course First", 'selectedGradeId', 'selectedGradeRemove');
             }
             ?>
             <input type="submit" name="submit" class="warningButton" value="remove">
         </form>
     </div>
+
+    <?php } ?>
 
 </div>
 
@@ -69,7 +86,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
 if(isSetAndIsNotNull($_POST)){
     if (isSetAndIsNotNull($_POST['submit'])) {
         $submit = $_POST['submit'];
-
+        //var_dump($_POST);
         if ($submit == 'add') {
             if (isSetAndIsNotNull($_POST['selectedStudentId']) && isSetAndIsNotNull($_POST['gradeValue']) && isSetAndIsNotNull($_POST['selectedCourseId'])) {
                 $studentId = $_POST['selectedStudentId'];
@@ -81,10 +98,10 @@ if(isSetAndIsNotNull($_POST)){
         } else if ($submit == 'change') {
             if (isSetAndIsNotNull($_POST['selectedGradeId']) && isSetAndIsNotNull($_POST['gradeValue'])) {
                 $gradeId = $_POST['selectedGradeId'];
-                if(isSetAndIsNotNull($_POST['gradeValue'])){
-                    $gradeValue = $_POST['gradeValue'];
-                    changeGrade($gradeValue, $gradeId);
-                }
+                $gradeValue = $_POST['gradeValue'];
+
+
+                changeGrade($gradeValue, $gradeId);
             }
         } else if ($submit == 'remove') {
             if (isSetAndIsNotNull($_POST['selectedGradeId'])) {
@@ -94,7 +111,7 @@ if(isSetAndIsNotNull($_POST)){
             }
         }
     }
-    reloadPage();
+   reloadPage();
 }
 include 'footer.php';
 ?>

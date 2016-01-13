@@ -54,6 +54,10 @@ function isLoginAsSecretary() {
     return $_SESSION["role"] == "SECRETARY";
 }
 
+function isLoginAsProfessor() {
+    return $_SESSION["role"] == "PROFESSOR";
+}
+
 function redirectLoginUser(){
     if (isset($_SESSION["user"]) && isset($_SESSION["role"]) && $_SESSION["user"] != null && $_SESSION["role"] != null) {
         $role = $_SESSION['role'];
@@ -581,7 +585,7 @@ function removeGrade($gradeId) {
 }
 
 function changeGrade($gradeVal, $gradeId) {
-    $query = mysql_query("UPDATE grade SET gradeVal = '$gradeVal' WHERE gradeId = $gradeId") or die(mysql_error());
+    $query = mysql_query("UPDATE grade SET gradeVal = $gradeVal WHERE gradeId = $gradeId") or die(mysql_error());
 
     return $query;
 }
@@ -595,6 +599,13 @@ function getCoursesThatNotHaveGradeTheStudent($departmentId, $studentId) {
 
 function getCoursesThatHaveGradeTheStudent($departmentId, $studentId) {
     $query = mysql_query("SELECT * FROM course WHERE courseId IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId") or die(mysql_error());
+    $result = getAllRows($query);
+
+    return $result;
+}
+
+function getGradeFromCourse($studentId, $courseID) {
+    $query = mysql_query("SELECT * FROM grade WHERE student_studentId = $studentId AND course_courseId = $courseID") or die(mysql_error());
     $result = getAllRows($query);
 
     return $result;
