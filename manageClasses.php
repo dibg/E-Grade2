@@ -66,13 +66,13 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 </div>
 
 <?php
-if(isSetAndIsNotNull($_POST)){
-    if (isSetAndIsNotNull($_POST['submit'])) {
+if(!empty($_POST)){
+    if (!empty($_POST['submit'])) {
         $submit = $_POST['submit'];
 
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['className'])&& isSetAndIsNotNull($_POST['selectedDepartmentId']) &&
-                isSetAndIsNotNull($_POST['selectedProfessorId']) && isSetAndIsNotNull($_POST['selectedCourseId'])) {
+            if (!empty($_POST['className'])&& !empty($_POST['selectedDepartmentId']) &&
+                !empty($_POST['selectedProfessorId']) && !empty($_POST['selectedCourseId'])) {
                 $departmentId = $_POST['selectedDepartmentId'];
                 $className = $_POST['className'];
                 $professorId = $_POST['selectedProfessorId'];
@@ -81,15 +81,15 @@ if(isSetAndIsNotNull($_POST)){
                 addClass($className, $departmentId, $professorId, $courseId);
             }
         } else if ($submit == 'rename') {
-            if (isSetAndIsNotNull($_POST['selectedClassId'])) {
+            if (!empty($_POST['selectedClassId'])) {
                 $classId = $_POST['selectedClassId'];
-                if(isSetAndIsNotNull($_POST['className'])){
+                if(!empty($_POST['className'])){
                     $className = $_POST['className'];
                     renameClass($className, $classId);
                 }
             }
         } else if ($submit == 'remove') {
-            if (isSetAndIsNotNull($_POST['selectedClassId'])) {
+            if (!empty($_POST['selectedClassId'])) {
                 $classId = $_POST['selectedClassId'];
 
                 removeClass($classId);

@@ -83,11 +83,11 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY", "PROFE
 </div>
 
 <?php
-if(isSetAndIsNotNull($_POST)){
-    if (isSetAndIsNotNull($_POST['submit'])) {
+if(!empty($_POST)){
+    if (!empty($_POST['submit'])) {
         $submit = $_POST['submit'];
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['selectedStudentId']) && isSetAndIsNotNull($_POST['gradeValue']) && isSetAndIsNotNull($_POST['selectedCourseId'])) {
+            if (!empty($_POST['selectedStudentId']) && !empty($_POST['gradeValue']) && !empty($_POST['selectedCourseId'])) {
                 $studentId = $_POST['selectedStudentId'];
                 $gradeValue = $_POST['gradeValue'];
                 $courseId = $_POST['selectedCourseId'];
@@ -95,7 +95,7 @@ if(isSetAndIsNotNull($_POST)){
                 addGrade($gradeValue, $studentId, $courseId);
             }
         } else if ($submit == 'change') {
-            if (isSetAndIsNotNull($_POST['selectedGradeId']) && isSetAndIsNotNull($_POST['gradeValue'])) {
+            if (!empty($_POST['selectedGradeId']) && !empty($_POST['gradeValue'])) {
                 $gradeId = $_POST['selectedGradeId'];
                 $gradeValue = $_POST['gradeValue'];
 
@@ -103,7 +103,7 @@ if(isSetAndIsNotNull($_POST)){
                 changeGrade($gradeValue, $gradeId);
             }
         } else if ($submit == 'remove') {
-            if (isSetAndIsNotNull($_POST['selectedGradeId'])) {
+            if (!empty($_POST['selectedGradeId'])) {
                 $gradeId = $_POST['selectedGradeId'];
 
                 removeGrade($gradeId);

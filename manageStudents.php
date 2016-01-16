@@ -83,12 +83,12 @@
 </div>
 
 <?php
-if(isSetAndIsNotNull($_POST)){
-    if (isSetAndIsNotNull($_POST['submit'])) {
+if(!empty($_POST)){
+    if (!empty($_POST['submit'])) {
         $submit = $_POST['submit'];
 
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['StudentUsername']) && isSetAndIsNotNull($_POST['StudentPassword']) && isSetAndIsNotNull($_POST['selectedDepartmentId'])) {
+            if (!empty($_POST['StudentUsername']) && !empty($_POST['StudentPassword']) && !empty($_POST['selectedDepartmentId'])) {
                 $departmentId = $_POST['selectedDepartmentId'];
                 $studentUsername = $_POST['StudentUsername'];
                 $studentPassword = $_POST['StudentPassword'];
@@ -96,27 +96,27 @@ if(isSetAndIsNotNull($_POST)){
                 addStudent($studentUsername, $studentPassword, $departmentId);
             }
         } else if ($submit == 'change') {
-            if (isSetAndIsNotNull($_POST['selectedStudentId'])) {
+            if (!empty($_POST['selectedStudentId'])) {
                 $studentId = $_POST['selectedStudentId'];
-                if(isSetAndIsNotNull($_POST['studentUsername'])){
+                if(!empty($_POST['studentUsername'])){
                     $studentUsername = $_POST['studentUsername'];
                     changestudentUsername($studentUsername, $studentId);
                 }
 
-                if(isSetAndIsNotNull($_POST['studentPassword'])){
+                if(!empty($_POST['studentPassword'])){
                     $studentPassword = $_POST['studentPassword'];
                     changestudentPassword($studentPassword, $studentId);
                 }
             }
         } else if ($submit == 'transfer') {
-            if (isSetAndIsNotNull($_POST['selectedStudentId']) && isSetAndIsNotNull($_POST['selectedDepartmentIdTo'])) {
+            if (!empty($_POST['selectedStudentId']) && !empty($_POST['selectedDepartmentIdTo'])) {
                 $studentId = $_POST['selectedStudentId'];
                 $departmentIdTo = $_POST['selectedDepartmentIdTo'];
 
                 transferStudent($studentId, $departmentIdTo);
             }
         } else if ($submit == 'remove') {
-            if (isSetAndIsNotNull($_POST['selectedStudentId'])) {
+            if (!empty($_POST['selectedStudentId'])) {
                 $studentId = $_POST['selectedStudentId'];
 
                 removeStudent($studentId);

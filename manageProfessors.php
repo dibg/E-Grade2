@@ -83,12 +83,12 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
 <?php
-if(isSetAndIsNotNull($_POST)){
-    if (isSetAndIsNotNull($_POST['submit'])) {
+if(!empty($_POST)){
+    if (!empty($_POST['submit'])) {
         $submit = $_POST['submit'];
 
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['professorPassword']) && isSetAndIsNotNull($_POST['professorUsername'])&& isSetAndIsNotNull($_POST['selectedDepartmentId'])) {
+            if (!empty($_POST['professorPassword']) && !empty($_POST['professorUsername'])&& !empty($_POST['selectedDepartmentId'])) {
                 $departmentId = $_POST['selectedDepartmentId'];
                 $professorUsername = $_POST['professorUsername'];
                 $professorPassword = $_POST['professorPassword'];
@@ -96,27 +96,27 @@ if(isSetAndIsNotNull($_POST)){
                 addProfessor($professorUsername, $professorPassword, $departmentId);
             }
         } else if ($submit == 'change') {
-            if (isSetAndIsNotNull($_POST['selectedProfessorId'])) {
+            if (!empty($_POST['selectedProfessorId'])) {
                 $professorId = $_POST['selectedProfessorId'];
-                if(isSetAndIsNotNull($_POST['professorUsername'])){
+                if(!empty($_POST['professorUsername'])){
                     $professorUsername = $_POST['professorUsername'];
                     changeProfessorUsername($professorUsername, $professorId);
                 }
 
-                if(isSetAndIsNotNull($_POST['professorPassword'])){
+                if(!empty($_POST['professorPassword'])){
                     $professorPassword = $_POST['professorPassword'];
                     changeProfessorPassword($professorPassword, $professorId);
                 }
             }
         } else if ($submit == 'transfer') {
-            if (isSetAndIsNotNull($_POST['selectedProfessorId']) && isSetAndIsNotNull($_POST['selectedDepartmentIdTo'])) {
+            if (!empty($_POST['selectedProfessorId']) && !empty($_POST['selectedDepartmentIdTo'])) {
                 $professorId = $_POST['selectedProfessorId'];
                 $departmentIdTo = $_POST['selectedDepartmentIdTo'];
 
                 transferProfessor($professorId, $departmentIdTo);
             }
         } else if ($submit == 'remove') {
-            if (isSetAndIsNotNull($_POST['selectedProfessorId'])) {
+            if (!empty($_POST['selectedProfessorId'])) {
                 $professorId = $_POST['selectedProfessorId'];
 
                 removeProfessor($professorId);

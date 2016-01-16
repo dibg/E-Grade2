@@ -80,7 +80,7 @@ function redirectLoginUser(){
 }
 
 function checkAndRedirectNotAuthorizedUsers($session, $expectedRole) {
-    if(isSetAndIsNotNull($session)) {
+    if(!empty($session)) {
         $role = $session['role'];
         if(sizeof($expectedRole) > 1) {
             if(!in_array($role, $expectedRole)) {
@@ -227,7 +227,7 @@ function generateDropDownListWithSpecifiedValueKey($data, $nameTag, $idTag, $val
 function generateOptions($data) {
     $output = "";
 
-    if(isSetAndIsNotNull($data)) {
+    if(!empty($data)) {
         foreach ($data as $obj) {
             $output .= "<option value='$obj'>$obj</option>";
         }
@@ -239,7 +239,7 @@ function generateOptions($data) {
 function generateOptionsWithSpecifiedValueField($data, $valueKey, $nameKey) {
     $output = "";
 
-    if(isSetAndIsNotNull($data)) {
+    if(!empty($data)) {
         foreach ($data as $obj) {
             $output .= "<option value='$obj[$valueKey]'>$obj[$nameKey]</option>";
         }

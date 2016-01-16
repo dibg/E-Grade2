@@ -70,12 +70,12 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 </div>
 
 <?php
-if(isSetAndIsNotNull($_POST)){
-    if (isSetAndIsNotNull($_POST['submit'])) {
+if(!empty($_POST)){
+    if (!empty($_POST['submit'])) {
         $submit = $_POST['submit'];
 
         if ($submit == 'add') {
-            if (isSetAndIsNotNull($_POST['departmentName']) && isSetAndIsNotNull($_POST['selectedUniversity']) && isSetAndIsNotNull($_POST['secretaryUsername']) && isSetAndIsNotNull($_POST['secretaryUsername'])) {
+            if (!empty($_POST['departmentName']) && !empty($_POST['selectedUniversity']) && !empty($_POST['secretaryUsername']) && !empty($_POST['secretaryUsername'])) {
                 $departmentName = $_POST['departmentName'];
                 $selectedUniversity = $_POST['selectedUniversity'];
                 $secretaryUsername = $_POST['secretaryUsername'];
@@ -86,7 +86,7 @@ if(isSetAndIsNotNull($_POST)){
                 addSecretary($secretaryUsername, $secretaryPassword, $departmentId);
             }
         } else if ($submit == 'rename') {
-            if (isSetAndIsNotNull($_POST['selectedUniversity']) && isSetAndIsNotNull($_POST['selectedDepartment']) && isSetAndIsNotNull($_POST['departmentName']) ) {
+            if (!empty($_POST['selectedUniversity']) && !empty($_POST['selectedDepartment']) && !empty($_POST['departmentName']) ) {
                 $selectedUniversity = $_POST['selectedUniversity'];
                 $selectedDepartment = $_POST['selectedDepartment'];
                 $departmentName = $_POST['departmentName'];
@@ -94,28 +94,28 @@ if(isSetAndIsNotNull($_POST)){
                 renameDepartment($selectedUniversity, $selectedDepartment, $departmentName);
             }
         } else if ($submit == 'change') {
-            if (isSetAndIsNotNull($_POST['selectedDepartmentId']) && isSetAndIsNotNull($_POST['selectedSecretaryId']) ) {
+            if (!empty($_POST['selectedDepartmentId']) && !empty($_POST['selectedSecretaryId']) ) {
                 $selectedDepartmentId = $_POST['selectedDepartmentId'];
                 $secretaryId = $_POST['selectedSecretaryId'];
 
-                if(isSetAndIsNotNull($_POST['secretaryUsername'])) {
+                if(!empty($_POST['secretaryUsername'])) {
                     $username = $_POST['secretaryUsername'];
                     changeSecretaryUsername($secretaryId, $username);
                 }
-                if(isSetAndIsNotNull($_POST['SecretaryPassword'])) {
+                if(!empty($_POST['SecretaryPassword'])) {
                     $password = $_POST['SecretaryPassword'];
                     changeSecretaryPassword($secretaryId, $password);
                 }
             }
         } else if ($submit == 'remove') {
-            if (isSetAndIsNotNull($_POST['selectedDepartmentId'])) {
+            if (!empty($_POST['selectedDepartmentId'])) {
                 $selectedDepartmentId = $_POST['selectedDepartmentId'];
 
                 removeSecretaryDepartmentId($selectedDepartmentId);
                 removeDepartment($selectedDepartmentId);
             }
         } else if ($submit == 'transfer') {
-            if (isSetAndIsNotNull($_POST['selectedDepartmentId']) && isSetAndIsNotNull($_POST['transferToSelectedUniversityId'])) {
+            if (!empty($_POST['selectedDepartmentId']) && !empty($_POST['transferToSelectedUniversityId'])) {
                 $selectedDepartmentId = $_POST['selectedDepartmentId'];
                 $transferToSelectedUniversityId = $_POST['transferToSelectedUniversityId'];
                 transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId);
