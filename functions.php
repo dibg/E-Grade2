@@ -2,50 +2,7 @@
 $output_buffering=16653; // 16k should be enough for everyone.
 ob_start();
 session_start();
-include 'connection.php';
 include 'databaseQueries.php';
-
-function loginAndRedirect($username, $password) {
-    if (isset($username) && isset($password)) {
-        $queryStudent =     mysql_query("SELECT *  FROM student    WHERE studentUsername   = '$username' AND studentPassword    = ('$password')") or die(mysql_error());
-        $queryProfessor =   mysql_query("SELECT *  FROM professor  WHERE professorUsername = '$username' AND professorPassword  = ('$password')") or die(mysql_error());
-        $querySecretary =   mysql_query("SELECT *  FROM secretary  WHERE secretaryUsername = '$username' AND secretaryPassword  = ('$password')") or die(mysql_error());
-        $queryAdmin =       mysql_query("SELECT *  FROM admin      WHERE adminUsername     = '$username' AND adminPassword      = ('$password')") or die(mysql_error());
-
-        $rowStudent = mysql_fetch_assoc($queryStudent);
-        $rowProfessor = mysql_fetch_assoc($queryProfessor);
-        $rowSecretary = mysql_fetch_assoc($querySecretary);
-        $rowAdmin = mysql_fetch_assoc($queryAdmin);
-
-        if(isset($rowStudent['studentUsername']) && isset($rowStudent['studentPassword'])){
-            $_SESSION["user"] = $rowStudent['studentUsername'];
-            $_SESSION["id"] = $rowStudent['studentId'];
-            $_SESSION["departmentId"] = $rowStudent['department_departmentId'];
-            $_SESSION["role"] = "STUDENT";
-            redirectTo("student.php");
-        } else if(isset($rowProfessor['professorUsername']) && isset($rowProfessor['professorPassword'])){
-            $_SESSION["user"] = $rowProfessor['professorUsername'];
-            $_SESSION["id"] = $rowProfessor['professorId'];
-            $_SESSION["departmentId"] = $rowProfessor['department_departmentId'];
-            $_SESSION["role"] = "PROFESSOR";
-            redirectTo("professor.php");
-        }else if(isset($rowSecretary['secretaryUsername']) && isset($rowSecretary["secretaryPassword"])){
-            $_SESSION["user"] = $rowSecretary['secretaryUsername'];
-            $_SESSION["id"] = $rowSecretary['secretaryId'];
-            $_SESSION["departmentId"] = $rowSecretary['department_departmentId'];
-            $_SESSION["role"] = "SECRETARY";
-            redirectTo("secretary.php");
-        } else if(isset($rowAdmin['adminUsername']) && isset($rowAdmin['adminPassword'])){
-            $_SESSION["user"] = $rowAdmin['adminUsername'];
-            $_SESSION["role"] = "ADMIN";
-            redirectTo("administrator.php");
-        } else {
-            $_SESSION["user"] = null;
-            $_SESSION["role"] = "GUEST";
-            redirectTo("login.php?login=failed");
-        }
-    }
-}
 
 function isLoginAsAdmin() {
     return $_SESSION["role"] == "ADMIN";
@@ -255,7 +212,7 @@ function reloadPage() {
 function getAllRows($query) {
     $result = null;
     $i = 0;
-    while($row = mysql_fetch_array($query)) {
+    while($row = mysqli_fetch_assoc($query)) {
         $result[$i] = $row;
         $i++;
     }
@@ -266,3 +223,5 @@ function getAllRows($query) {
 function isSetAndIsNotNull($var) {
     return (isset($var) && $var != null);
 }
+
+?>
