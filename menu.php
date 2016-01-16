@@ -2,7 +2,7 @@
     $path = $_SERVER["SCRIPT_NAME"];
     $file = basename($path, ".php");
 
-    if(isset($_SESSION['role']) && $_SESSION['role'] != null){
+    if(!empty($_SESSION['role'])){
         $role = $_SESSION['role'];
     } else {
         $role = "GUEST";
