@@ -1,27 +1,4 @@
 $(document).ready(function(){
-    $('.formContainer input[type=submit]').click(function() {
-        var submitType = $(this).attr("value");
-        $('.formContainer ' + '#' + submitType + ' form').submit(function(e) {
-            var postData = $(this).serializeArray();
-            var formURL = $(this).attr("action");
-            postData.push({ name: "submit", value: submitType });
-            $.ajax({
-                url : formURL,
-                type: "POST",
-                data : postData,
-                success:function(html)
-                {
-                    $('select').change();
-                },
-                error: function(html)
-                {
-                    window.alert("failed");
-                }
-            });
-            e.preventDefault();
-        });
-    });
-
     $('#selectedUniversityRename').on('change',function(){
         var universityName = $(this).val();
         if(universityName){

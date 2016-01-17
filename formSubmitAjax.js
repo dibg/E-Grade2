@@ -11,7 +11,9 @@ $(document).ready(function() {
                 data : postData,
                 success:function(html)
                 {
+                    //window.alert('hi');
                     //$('#msg').html(html);
+                    $('#' + submitType + ' input[type="text"]').val("");
                     $('select').change();
                 },
                 error: function(html)

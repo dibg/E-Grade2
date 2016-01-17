@@ -2,7 +2,7 @@
     include 'header.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
-<script src="universityAjax.js"></script>
+<script src="formSubmitAjax.js"></script>
 
 <div class="formContainer">
     <div id="msg"></div>

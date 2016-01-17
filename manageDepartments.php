@@ -3,6 +3,7 @@
     checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
 <script src="departmentAjax.js"></script>
+<script src="formSubmitAjax.js"></script>
 
 <div class="formContainer">
     <div class="department" id="add">
