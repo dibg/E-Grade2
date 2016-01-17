@@ -2,7 +2,8 @@
     include 'header.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
-<script src="formSubmitAjax.js"></script>
+    <script src="formSubmitAjax.js"></script>
+    <script src="universitiesAjax.js"></script>
 
 <div class="formContainer">
     <div id="msg"></div>
@@ -19,7 +20,7 @@
         <form action="manageUniversitiesSubmit.php" method="post">
             <?php
             $uni = getAllUniversitiesNames();
-            echo generateDropDownList($uni, 'selectedUniversity');
+            echo generateDropDownList($uni, 'selectedUniversity', 'selectedUniversity');
             ?>
             <input type="text" name="universityName" placeholder="University Name"><br>
             <input type="submit" name="submit" value="rename">
@@ -31,7 +32,7 @@
         <form action="manageUniversitiesSubmit.php" method="post">
             <?php
         $uni = getAllUniversitiesNames();
-        echo generateDropDownList($uni, 'selectedUniversity');
+        echo generateDropDownList($uni, 'selectedUniversity', 'selectedUniversity');
         ?>
             <input type="submit" name="submit" class="warningButton" value="remove">
         </form>

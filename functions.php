@@ -230,4 +230,18 @@ function query($query){
     return $results;
 }
 
+function queryStatusMessage($queryStatus) {
+    if($queryStatus){
+        $statusMessage = "";
+    } else {
+        $statusMessage = "Not Worked";
+    }
+
+    return $statusMessage;
+}
+
+function emptyFormMessage(){
+    return "Please fill all the form fields.";
+}
+
 ?>

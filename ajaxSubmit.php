@@ -84,6 +84,12 @@ if (!empty($_POST)) {
                     echo generateOptionsWithSpecifiedValueField($gra, 'gradeId', 'gradeVal');
                 }
                 break;
+            case 'getUniversities' :
+                if (!empty($_POST[$key])) {
+                    $uni = getAllUniversities();
+                    echo generateOptionsWithSpecifiedValueField($uni, 'universityName', 'universityName');
+                }
+                break;
 
         }
     }

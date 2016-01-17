@@ -11,7 +11,7 @@ $(document).ready(function() {
                 data : postData,
                 success:function(html)
                 {
-                    //window.alert('hi');
+                    //window.alert(html);
                     $('#msg').html(html);
                     $('#' + submitType + ' input[type="text"]').val("");
                     $('select').change();
@@ -22,6 +22,7 @@ $(document).ready(function() {
                 }
             });
             e.preventDefault();	//don't refresh the page
+            //e.unbind();
         });
     });
 });

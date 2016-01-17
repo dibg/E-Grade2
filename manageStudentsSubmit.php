@@ -1,6 +1,5 @@
 <?php
 include 'functions.php';
-$statusMessage = "Please fill all the form data.";
 
 if(!empty($_POST)){
     if (!empty($_POST['submit'])) {
@@ -44,12 +43,9 @@ if(!empty($_POST)){
     }
 }
 
-if(!empty($isExecutedSuccessful)){
-    if($isExecutedSuccessful) $statusMessage = "";
-    else $statusMessage = "Not Worked";
+if(!empty($isExecutedSuccessful)) {
+    echo queryStatusMessage($isExecutedSuccessful);
 } else {
-    $statusMessage = "Please fill all the form data.";
+    echo emptyFormMessage();
 }
-echo $statusMessage;
-
 ?>
