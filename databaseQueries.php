@@ -3,10 +3,10 @@ include 'connection.php';
 
 function loginAndRedirect($username, $password) {
     if (isset($username) && isset($password)) {
-        $queryStudent =     mysqli_query($GLOBALS['dbLink'], "SELECT *  FROM student    WHERE studentUsername   = '$username' AND studentPassword    = ('$password')") or die(mysql_error());
-        $queryProfessor =   mysqli_query($GLOBALS['dbLink'], "SELECT *  FROM professor  WHERE professorUsername = '$username' AND professorPassword  = ('$password')") or die(mysql_error());
-        $querySecretary =   mysqli_query($GLOBALS['dbLink'], "SELECT *  FROM secretary  WHERE secretaryUsername = '$username' AND secretaryPassword  = ('$password')") or die(mysql_error());
-        $queryAdmin =       mysqli_query($GLOBALS['dbLink'], "SELECT *  FROM admin      WHERE adminUsername     = '$username' AND adminPassword      = ('$password')") or die(mysql_error());
+        $queryStudent =     query("SELECT *  FROM student    WHERE studentUsername   = '$username' AND studentPassword    = ('$password')");
+        $queryProfessor =   query("SELECT *  FROM professor  WHERE professorUsername = '$username' AND professorPassword  = ('$password')");
+        $querySecretary =   query("SELECT *  FROM secretary  WHERE secretaryUsername = '$username' AND secretaryPassword  = ('$password')");
+        $queryAdmin =       query("SELECT *  FROM admin      WHERE adminUsername     = '$username' AND adminPassword      = ('$password')");
 
         $rowStudent = mysqli_fetch_assoc($queryStudent);
         $rowProfessor = mysqli_fetch_assoc($queryProfessor);
@@ -45,7 +45,7 @@ function loginAndRedirect($username, $password) {
 
 
 function getStudentGrades($username) {
-    $query = mysqli_query($GLOBALS['dbLink'], "CALL getStudentGrades('$username')") or die(mysql_error());
+    $query = query("CALL getStudentGrades('$username')");
 
     $result = null;
     $i = 0;
@@ -60,7 +60,7 @@ function getStudentGrades($username) {
 }
 
 function getAllUniversitiesNames() {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT universityName FROM university") or die(mysql_error());
+    $query = query("SELECT universityName FROM university");
     $result = null;
     $i = 0;
     while($row = mysqli_fetch_assoc($query)) {
@@ -72,14 +72,14 @@ function getAllUniversitiesNames() {
 }
 
 function getAllUniversities() {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM university") or die(mysql_error());
+    $query = query("SELECT * FROM university");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function getDepartmentsNames($universityName){
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT departmentName FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';") or die(mysql_error());
+    $query = query("SELECT departmentName FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';");
     $result = null;
     $i = 0;
 
@@ -92,7 +92,7 @@ function getDepartmentsNames($universityName){
 }
 
 function getDepartments($universityName){
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT departmentId, departmentName, university_universityId FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';") or die(mysql_error());
+    $query = query("SELECT departmentId, departmentName, university_universityId FROM university INNER JOIN department ON university.universityId = department.university_universityId WHERE universityName = '$universityName';");
     $result = getAllRows($query);
 
     return $result;
@@ -100,92 +100,92 @@ function getDepartments($universityName){
 
 
 function addUniversity($universityName){
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO university(universityName) VALUES('$universityName');") or die(mysql_error());
+    $query = query("INSERT INTO university(universityName) VALUES('$universityName');");
 
     return $query;
 }
 
 function renameUniversity($universityName, $newName){
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE university SET universityName= '$newName' WHERE universityName = '$universityName'") or die(mysql_error());
+    $query = query("UPDATE university SET universityName= '$newName' WHERE universityName = '$universityName'");
 
     return $query;
 }
 
 function removeUniversity($universityName){
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM university WHERE universityName='$universityName';") or die(mysql_error());
+    $query = query("DELETE FROM university WHERE universityName='$universityName';");
 
     return $query;
 }
 
 function getSecretaries($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM secretary WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM secretary WHERE department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function addSecretary($username, $password, $departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO secretary(secretaryUsername, secretaryPassword, department_departmentId) VALUES('$username', '$password', $departmentId)") or die(mysql_error());
+    $query = query("INSERT INTO secretary(secretaryUsername, secretaryPassword, department_departmentId) VALUES('$username', '$password', $departmentId)");
 
     return $query;
 }
 
 function removeSecretaryDepartmentId($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM secretary WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("DELETE FROM secretary WHERE department_departmentId = $departmentId");
 
     return $query;
 }
 
 function removeSecretary($secretaryId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM secretary WHERE secretaryId = $secretaryId") or die(mysql_error());
+    $query = query("DELETE FROM secretary WHERE secretaryId = $secretaryId");
 
     return $query;
 }
 
 function changeSecretaryUsername($secretaryId, $username) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE secretary SET secretaryUsername = '$username' WHERE secretaryId = $secretaryId") or die(mysql_error());
+    $query = query("UPDATE secretary SET secretaryUsername = '$username' WHERE secretaryId = $secretaryId");
 
     return $query;
 }
 
 function changeSecretaryPassword($secretaryId, $password) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE secretary SET secretaryPassword = '$password' WHERE secretaryId = $secretaryId") or die(mysql_error()); //todo
+    $query = query("UPDATE secretary SET secretaryPassword = '$password' WHERE secretaryId = $secretaryId"); //todo
 
     return $query;
 }
 
 function addDepartment($universityName, $departmentName) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO department(departmentName, university_universityId) VALUES('$departmentName',(SELECT universityId FROM university WHERE universityName = '$universityName'))") or die(mysql_error());
+    $query = query("INSERT INTO department(departmentName, university_universityId) VALUES('$departmentName',(SELECT universityId FROM university WHERE universityName = '$universityName'))");
 
     return $query;
 }
 
 function renameDepartment($selectedUniversity, $selectedDepartment, $newDepartmentName) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE department SET departmentName = '$newDepartmentName' WHERE departmentName = '$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity')") or die(mysql_error());
+    $query = query("UPDATE department SET departmentName = '$newDepartmentName' WHERE departmentName = '$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity')");
 
     return $query;
 }
 
 function removeDepartment($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM department WHERE departmentId = $departmentId") or die(mysql_error());
+    $query = query("DELETE FROM department WHERE departmentId = $departmentId");
 
     return $query;
 }
 
 function removeDepartmentSelectWithUniversityNameAndDepartmentName($selectedUniversity, $selectedDepartment) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');") or die(mysql_error());
+    $query = query("DELETE FROM department WHERE departmentName='$selectedDepartment' AND university_universityId = (SELECT universityId FROM university WHERE universityName = '$selectedUniversity');");
 
     return $query;
 }
 
 function transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE department SET university_universityId = $transferToSelectedUniversityId WHERE departmentId = $selectedDepartmentId") or die(mysql_error());
+    $query = query("UPDATE department SET university_universityId = $transferToSelectedUniversityId WHERE departmentId = $selectedDepartmentId");
 
     return $query;
 }
 
 function getProfessorsUsernames($universityName, $departmentName) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT professorUsername FROM professor INNER JOIN department ON professor.department_departmentId = department.departmentId INNER JOIN university WHERE universityName = '$universityName' and departmentName = '$departmentName'") or die(mysql_error());
+    $query = query("SELECT professorUsername FROM professor INNER JOIN department ON professor.department_departmentId = department.departmentId INNER JOIN university WHERE universityName = '$universityName' and departmentName = '$departmentName'");
     $result = null;
     $i = 0;
     while($row = mysqli_fetch_assoc($query)) {
@@ -197,194 +197,194 @@ function getProfessorsUsernames($universityName, $departmentName) {
 }
 
 function getProfessors($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM professor WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM professor WHERE department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function addProfessor($username, $password, $departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO professor(professorUsername, professorPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)") or die(mysql_error());
+    $query = query("INSERT INTO professor(professorUsername, professorPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)");
 
     return $query;
 }
 
 function changeProfessor($username, $password, $professorId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE professor SET professorUsername = $username, professorPassword = $password WHERE professorId = $professorId") or die(mysql_error());
+    $query = query("UPDATE professor SET professorUsername = $username, professorPassword = $password WHERE professorId = $professorId");
 
     return $query;
 }
 
 function changeProfessorUsername($username, $professorId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE professor SET professorUsername = '$username' WHERE professorId = $professorId") or die(mysql_error());
+    $query = query("UPDATE professor SET professorUsername = '$username' WHERE professorId = $professorId");
 
     return $query;
 }
 
 function changeProfessorPassword($password, $professorId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE professor SET professorPassword = '$password' WHERE professorId = $professorId") or die(mysql_error());
+    $query = query("UPDATE professor SET professorPassword = '$password' WHERE professorId = $professorId");
 
     return $query;
 }
 
 function transferProfessor($professorId, $departmentIdTo) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE professor SET department_departmentId = $departmentIdTo WHERE professorId = $professorId") or die(mysql_error());
+    $query = query("UPDATE professor SET department_departmentId = $departmentIdTo WHERE professorId = $professorId");
 
     return $query;
 }
 
 function removeProfessor($professorId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM professor WHERE professorId = $professorId") or die(mysql_error());
+    $query = query("DELETE FROM professor WHERE professorId = $professorId");
 
     return $query;
 }
 
 function getStudents($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM student WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM student WHERE department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function addStudent($username, $password, $departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO student(studentUsername, studentPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)") or die(mysql_error());
+    $query = query("INSERT INTO student(studentUsername, studentPassword, department_departmentId) VALUES ('$username', '$password', $departmentId)");
 
     return $query;
 }
 
 function changeStudentUsername($username, $studentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE student SET studentUsername = '$username' WHERE studentId = $studentId") or die(mysql_error());
+    $query = query("UPDATE student SET studentUsername = '$username' WHERE studentId = $studentId");
 
     return $query;
 }
 
 function changeStudentPassword($password, $studentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE student SET studentPassword = '$password' WHERE studentId = $studentId") or die(mysql_error());
+    $query = query("UPDATE student SET studentPassword = '$password' WHERE studentId = $studentId");
 
     return $query;
 }
 
 function removeStudent($studentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM student WHERE studentId = $studentId") or die(mysql_error());
+    $query = query("DELETE FROM student WHERE studentId = $studentId");
 
     return $query;
 }
 
 function transferStudent($studentId, $departmentIdTo) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE student SET department_departmentId = $departmentIdTo WHERE studentId = $studentId") or die(mysql_error());
+    $query = query("UPDATE student SET department_departmentId = $departmentIdTo WHERE studentId = $studentId");
 
     return $query;
 }
 
 function getCourses($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM course WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM course WHERE department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function addCourse($courseName, $departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO course(courseName, department_departmentId) VALUES ('$courseName', '$departmentId')") or die(mysql_error());
+    $query = query("INSERT INTO course(courseName, department_departmentId) VALUES ('$courseName', '$departmentId')");
 
     return $query;
 }
 
 function removeCourse($courseId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM course WHERE courseId = $courseId") or die(mysql_error());
+    $query = query("DELETE FROM course WHERE courseId = $courseId");
 
     return $query;
 }
 
 function renameCourse($courseName, $courseId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE course SET courseName = '$courseName' WHERE courseId = $courseId") or die(mysql_error());
+    $query = query("UPDATE course SET courseName = '$courseName' WHERE courseId = $courseId");
 
     return $query;
 }
 
 function transferCourse($courseId, $departmentIdTo) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE course SET department_departmentId = $departmentIdTo WHERE courseId = $courseId") or die(mysql_error());
+    $query = query("UPDATE course SET department_departmentId = $departmentIdTo WHERE courseId = $courseId");
 
     return $query;
 }
 
 function getClasses($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM class WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM class WHERE department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function addClass($className, $departmentId, $professorId, $courseId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO class(className, department_departmentId, professor_professorId, course_courseId) VALUES ('$className', '$departmentId', '$professorId', '$courseId')") or die(mysql_error());
+    $query = query("INSERT INTO class(className, department_departmentId, professor_professorId, course_courseId) VALUES ('$className', '$departmentId', '$professorId', '$courseId')");
 
     return $query;
 }
 
 function assignClassProfessor($classId, $professorId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE class SET professor_professorId = '$professorId' WHERE classId = $classId") or die(mysql_error());
+    $query = query("UPDATE class SET professor_professorId = '$professorId' WHERE classId = $classId");
 
     return $query;
 }
 
 function assignClassCourse($classId, $courseId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE class SET course_courseId = '$courseId' WHERE classId = $classId") or die(mysql_error());
+    $query = query("UPDATE class SET course_courseId = '$courseId' WHERE classId = $classId");
 
     return $query;
 }
 
 function removeClass($classId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM class WHERE classId = $classId") or die(mysql_error());
+    $query = query("DELETE FROM class WHERE classId = $classId");
 
     return $query;
 }
 
 function renameClass($className, $classId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE class SET className = '$className' WHERE classId = $classId") or die(mysql_error());
+    $query = query("UPDATE class SET className = '$className' WHERE classId = $classId");
 
     return $query;
 }
 
 function getGrades($departmentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM grade WHERE department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM grade WHERE department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function addGrade($gradeVal, $studentId, $courseId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "INSERT INTO grade(gradeVal, student_studentId, course_courseId) VALUES ('$gradeVal', '$studentId', $courseId)") or die(mysql_error());
+    $query = query("INSERT INTO grade(gradeVal, student_studentId, course_courseId) VALUES ('$gradeVal', '$studentId', $courseId)");
 
     return $query;
 }
 
 function removeGrade($gradeId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "DELETE FROM grade WHERE gradeId = $gradeId") or die(mysql_error());
+    $query = query("DELETE FROM grade WHERE gradeId = $gradeId");
 
     return $query;
 }
 
 function changeGrade($gradeVal, $gradeId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "UPDATE grade SET gradeVal = $gradeVal WHERE gradeId = $gradeId") or die(mysql_error());
+    $query = query("UPDATE grade SET gradeVal = $gradeVal WHERE gradeId = $gradeId");
 
     return $query;
 }
 
 function getCoursesThatNotHaveGradeTheStudent($departmentId, $studentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM course WHERE courseId NOT IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM course WHERE courseId NOT IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function getCoursesThatHaveGradeTheStudent($departmentId, $studentId) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM course WHERE courseId IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId") or die(mysql_error());
+    $query = query("SELECT * FROM course WHERE courseId IN(SELECT course_courseId FROM grade WHERE student_studentId = $studentId) AND course.department_departmentId = $departmentId");
     $result = getAllRows($query);
 
     return $result;
 }
 
 function getGradeFromCourse($studentId, $courseID) {
-    $query = mysqli_query($GLOBALS['dbLink'], "SELECT * FROM grade WHERE student_studentId = $studentId AND course_courseId = $courseID") or die(mysql_error());
+    $query = query("SELECT * FROM grade WHERE student_studentId = $studentId AND course_courseId = $courseID");
     $result = getAllRows($query);
 
     return $result;

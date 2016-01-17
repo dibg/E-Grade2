@@ -224,4 +224,10 @@ function isSetAndIsNotNull($var) {
     return (isset($var) && $var != null);
 }
 
+function query($query){
+    $results = mysqli_query($GLOBALS['dbLink'], $query) or die(mysql_error());
+
+    return $results;
+}
+
 ?>
