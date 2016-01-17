@@ -35,7 +35,7 @@
             echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedProfessorId', 'selectedProfessorChange');
         } else if(isLoginAsSecretary()) {
             $departmentId = $_SESSION["departmentId"];
-            echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+            echo "<input type='hidden' name='selectedDepartmentId' id='selectedDepartmentIdSec' value='$departmentId'>";
             echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorChange', 'professorId', 'professorUsername');
         }
         ?>
@@ -76,7 +76,7 @@
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
                 echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
-                echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorChange', 'professorId', 'professorUsername');
+                echo generateDropDownListWithSpecifiedValueKey(getProfessors($departmentId), 'selectedProfessorId', 'selectedProfessorRemove', 'professorId', 'professorUsername');
             }
             ?>
             <input type="submit" name="submit" class="warningButton" value="remove">

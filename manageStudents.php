@@ -35,7 +35,7 @@
                 echo generateDropDownListWithFirstOption(null, "Select Department First", 'selectedStudentId', 'selectedStudentChange');
             } else if(isLoginAsSecretary()) {
                 $departmentId = $_SESSION["departmentId"];
-                echo "<input type='hidden' name='selectedDepartmentId' value='$departmentId'>";
+                echo "<input type='hidden' name='selectedDepartmentId' id='selectedDepartmentIdSec' value='$departmentId'>";
                 echo generateDropDownListWithSpecifiedValueKey(getStudents($departmentId), 'selectedStudentId', 'selectedStudentChange', 'studentId', 'studentUsername');
             }
             ?>

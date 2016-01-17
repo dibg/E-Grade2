@@ -34,6 +34,7 @@ $(document).ready(function() {
             data: 'getUniversities=true',
             success: function (html) {
                 $('.selectedUniversity').html(html).change();
+                $('.formContainer select').change();
             }
         });
     });

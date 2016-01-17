@@ -225,7 +225,7 @@ function isSetAndIsNotNull($var) {
 }
 
 function query($query){
-    $results = mysqli_query($GLOBALS['dbLink'], $query) or die(mysql_error());
+    $results = mysqli_query($GLOBALS['dbLink'], $query) or die(mysqli_error($GLOBALS['dbLink']));
 
     return $results;
 }
