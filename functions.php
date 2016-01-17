@@ -148,7 +148,7 @@ function generateDropDownList($data, $nameTag, $classTag="none", $idTag="none"){
 }
 
 function generateDropDownListWithFirstOption($data, $firstOption, $nameTag, $idTag="none"){
-    $output = "<select name='$nameTag'";
+    $output = "<select autocomplete='off' name='$nameTag'";
     if($idTag != "none"){
         $output .= " id='$idTag'";
     }
@@ -161,7 +161,7 @@ function generateDropDownListWithFirstOption($data, $firstOption, $nameTag, $idT
 }
 
 function generateDropDownListWithFirstOptionAndSpecifiedValueKey($data, $firstOption, $nameTag, $idTag, $valueKey, $nameKey){
-    $output = "<select name='$nameTag'";
+    $output = "<select autocomplete='off' name='$nameTag'";
     $output .= " id='$idTag'";
     $output .= ">";
     $output .= "<option value=''>$firstOption</option>";
@@ -172,7 +172,7 @@ function generateDropDownListWithFirstOptionAndSpecifiedValueKey($data, $firstOp
 }
 
 function generateDropDownListWithSpecifiedValueKey($data, $nameTag, $idTag, $valueKey, $nameKey){
-    $output = "<select name='$nameTag'";
+    $output = "<select autocomplete='off' name='$nameTag'";
     $output .= " id='$idTag'";
     $output .= ">";
     $output .= generateOptionsWithSpecifiedValueField($data, $valueKey, $nameKey);

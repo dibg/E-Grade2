@@ -13,7 +13,7 @@ if(!empty($_POST)){
                 $secretaryPassword = $_POST['secretaryPassword'];
 
                 addDepartment($selectedUniversity, $departmentName);
-                $departmentId = mysql_insert_id();
+                $departmentId = mysqli_insert_id($GLOBALS['dbLink']);
                 $isExecutedSuccessful = addSecretary($secretaryUsername, $secretaryPassword, $departmentId);
             }
         } else if ($submit == 'rename') {

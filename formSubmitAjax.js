@@ -26,5 +26,18 @@ $(document).ready(function() {
             //e.unbind();
         });
     });
+
+    $(document).on("formSubmitted", function () {
+        $.ajax({
+            type: 'POST',
+            url: 'ajaxSubmit.php',
+            data: 'getUniversities=true',
+            success: function (html) {
+                $('.selectedUniversity').html(html).change();
+            }
+        });
+    });
+
+
 });
 
