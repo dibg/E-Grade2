@@ -23,11 +23,12 @@ $(document).ready(function() {
                 }
             });
             e.preventDefault();	//don't refresh the page
-            //e.unbind();
+            e.unbind();
         });
     });
 
     $(document).on("formSubmitted", function () {
+        e.preventDefault();
         $.ajax({
             type: 'POST',
             url: 'ajaxSubmit.php',

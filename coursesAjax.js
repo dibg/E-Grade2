@@ -1,17 +1,15 @@
 $(document).ready(function(){
-    $(document).ready(function () {
-        $(document).on("formSubmitted", function () {
-            var departmentId = $('#selectedDepartmentIdSec').val();
-            $.ajax({
-                type: 'POST',
-                url: 'ajaxSubmit.php',
-                data: 'departmentIdAndReturnCourseId='+departmentId,
-                success: function (html) {
-                    $('#selectedCourseChange').html(html).change();
-                    $('#selectedCourseRemove').html(html).change();
-                    $('.formContainer select').change();
-                }
-            });
+    $(document).on("formSubmitted", function () {
+        var departmentId = $('#selectedDepartmentIdSec').val();
+        $.ajax({
+            type: 'POST',
+            url: 'ajaxSubmit.php',
+            data: 'departmentIdAndReturnCourseId='+departmentId,
+            success: function (html) {
+                $('#selectedCourseChange').html(html).change();
+                $('#selectedCourseRemove').html(html).change();
+                $('.formContainer select').change();
+            }
         });
     });
 

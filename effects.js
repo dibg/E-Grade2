@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     // scroll effect
     var speed = "fast"
     $("#add h4").click(function(){
