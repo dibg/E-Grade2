@@ -1,13 +1,13 @@
 <?php
-include 'header.php';
-checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
+    include 'header.php';
+    checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 ?>
 <script src="professorAjax.js"></script>
 
 <div class="formContainer">
     <div class="professor" id="add">
         <h4>Add Professor</h4>
-        <form action="" method="post">
+        <form action="manageProfessorsSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityAdd');
@@ -25,7 +25,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 
     <div class="professor" id="change">
         <h4>Change Professor UserName And Password</h4>
-        <form action="" method="post">
+        <form action="manageProfessorsSubmit.php" method="post">
             <?php
         if(isLoginAsAdmin()) {
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityChange');
@@ -48,7 +48,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
             if(isLoginAsAdmin()) {
         ?>
         <h4>Transfer Professor University And Department</h4>
-        <form action="" method="post">
+        <form action="manageProfessorsSubmit.php" method="post">
             <?php
             echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityTransfer');
             echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentTransfer');
@@ -65,7 +65,7 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
 
     <div class="professor" id="remove">
         <h4>Remove Professor</h4>
-        <form action="" method="post">
+        <form action="manageProfessorsSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityRemove');
@@ -83,47 +83,5 @@ checkAndRedirectNotAuthorizedUsers($_SESSION, array("ADMIN", "SECRETARY"));
     </div>
 
 <?php
-if(!empty($_POST)){
-    if (!empty($_POST['submit'])) {
-        $submit = $_POST['submit'];
-
-        if ($submit == 'add') {
-            if (!empty($_POST['professorPassword']) && !empty($_POST['professorUsername'])&& !empty($_POST['selectedDepartmentId'])) {
-                $departmentId = $_POST['selectedDepartmentId'];
-                $professorUsername = $_POST['professorUsername'];
-                $professorPassword = $_POST['professorPassword'];
-
-                addProfessor($professorUsername, $professorPassword, $departmentId);
-            }
-        } else if ($submit == 'change') {
-            if (!empty($_POST['selectedProfessorId'])) {
-                $professorId = $_POST['selectedProfessorId'];
-                if(!empty($_POST['professorUsername'])){
-                    $professorUsername = $_POST['professorUsername'];
-                    changeProfessorUsername($professorUsername, $professorId);
-                }
-
-                if(!empty($_POST['professorPassword'])){
-                    $professorPassword = $_POST['professorPassword'];
-                    changeProfessorPassword($professorPassword, $professorId);
-                }
-            }
-        } else if ($submit == 'transfer') {
-            if (!empty($_POST['selectedProfessorId']) && !empty($_POST['selectedDepartmentIdTo'])) {
-                $professorId = $_POST['selectedProfessorId'];
-                $departmentIdTo = $_POST['selectedDepartmentIdTo'];
-
-                transferProfessor($professorId, $departmentIdTo);
-            }
-        } else if ($submit == 'remove') {
-            if (!empty($_POST['selectedProfessorId'])) {
-                $professorId = $_POST['selectedProfessorId'];
-
-                removeProfessor($professorId);
-            }
-        }
-    }
-    reloadPage();
-}
 include 'footer.php';
 ?>

@@ -2,10 +2,13 @@
     include 'header.php';
     checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
+<script src="universityAjax.js"></script>
+
 <div class="formContainer">
+    <div id="msg"></div>
     <div class="university" id="add">
         <h4>Add University</h4>
-        <form action="" method="post">
+        <form action="manageUniversitiesSubmit.php" method="post">
             <input type="text" name="universityName" placeholder="University Name"><br>
             <input type="submit" name="submit" value="add">
         </form>
@@ -13,7 +16,7 @@
 
     <div class="university" id="rename">
         <h4>Rename University</h4>
-        <form action="" method="post">
+        <form action="manageUniversitiesSubmit.php" method="post">
             <?php
             $uni = getAllUniversitiesNames();
             echo generateDropDownList($uni, 'selectedUniversity');
@@ -25,7 +28,7 @@
 
     <div class="university" id="remove">
         <h4>Remove University</h4>
-        <form action="" method="post">
+        <form action="manageUniversitiesSubmit.php" method="post">
             <?php
         $uni = getAllUniversitiesNames();
         echo generateDropDownList($uni, 'selectedUniversity');
@@ -35,31 +38,6 @@
     </div>
     </div>
 
-
 <?php
-if(!empty($_POST)){
-    if (!empty($_POST['submit'])) {
-        $submit = $_POST['submit'];
-
-        if ($submit == 'add') {
-            if (!empty($_POST['universityName'])) {
-                $universityName = $_POST['universityName'];
-                addUniversity($universityName);
-            }
-        } elseif ($submit == 'rename') {
-            if (!empty($_POST['selectedUniversity']) && !empty($_POST['universityName'])) {
-                $selectedUniversity = $_POST['selectedUniversity'];
-                $universityName = $_POST['universityName'];
-                renameUniversity($selectedUniversity, $universityName);
-            }
-        } else if ($submit == 'remove') {
-            if (!empty($_POST['selectedUniversity'])) {
-                $selectedUniversity = $_POST['selectedUniversity'];
-                removeUniversity($selectedUniversity);
-            }
-        }
-    }
-    reloadPage();
-}
     include 'footer.php';
 ?>

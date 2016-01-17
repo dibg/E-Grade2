@@ -1,6 +1,6 @@
 <?php
-include 'header.php';
-checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
+    include 'header.php';
+    checkAndRedirectNotAuthorizedUsers($_SESSION, "ADMIN");
 ?>
 <script src="departmentAjax.js"></script>
 
