@@ -1,4 +1,19 @@
 $(document).ready(function(){
+    $(document).on("formSubmitted", function () {
+        var departmentId = $('#selectedDepartmentAdd').val();
+        $.ajax({
+            type: 'POST',
+            url: 'ajaxSubmit.php',
+            data: 'departmentIdAndReturnStudentId=' + departmentId,
+            success: function (html) {
+                $('#selectedStudentAddSec').html(html).change();
+                $('#selectedStudentChangeSec').html(html).change();
+                $('#selectedStudentRemoveSec').html(html).change();
+                $('.formContainer select').change();
+            }
+        });
+    });
+
     $('#selectedUniversityAdd').on('change',function(){
         var universityName = $(this).val();
         if(universityName){
