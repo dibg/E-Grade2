@@ -14,7 +14,7 @@ if(!empty($_POST)){
 
                 addDepartment($selectedUniversity, $departmentName);
                 $departmentId = mysql_insert_id();
-                addSecretary($secretaryUsername, $secretaryPassword, $departmentId);
+                $isExecutedSuccessful = addSecretary($secretaryUsername, $secretaryPassword, $departmentId);
             }
         } else if ($submit == 'rename') {
             if (!empty($_POST['selectedUniversity']) && !empty($_POST['selectedDepartment']) && !empty($_POST['departmentName']) ) {
@@ -22,7 +22,7 @@ if(!empty($_POST)){
                 $selectedDepartment = $_POST['selectedDepartment'];
                 $departmentName = $_POST['departmentName'];
 
-                renameDepartment($selectedUniversity, $selectedDepartment, $departmentName);
+                $isExecutedSuccessful = renameDepartment($selectedUniversity, $selectedDepartment, $departmentName);
             }
         } else if ($submit == 'change') {
             if (!empty($_POST['selectedDepartmentId']) && !empty($_POST['selectedSecretaryId']) ) {
@@ -31,11 +31,11 @@ if(!empty($_POST)){
 
                 if(!empty($_POST['secretaryUsername'])) {
                     $username = $_POST['secretaryUsername'];
-                    changeSecretaryUsername($secretaryId, $username);
+                    $isExecutedSuccessful = changeSecretaryUsername($secretaryId, $username);
                 }
                 if(!empty($_POST['SecretaryPassword'])) {
                     $password = $_POST['SecretaryPassword'];
-                    changeSecretaryPassword($secretaryId, $password);
+                    $isExecutedSuccessful = changeSecretaryPassword($secretaryId, $password);
                 }
             }
         } else if ($submit == 'remove') {
@@ -43,16 +43,24 @@ if(!empty($_POST)){
                 $selectedDepartmentId = $_POST['selectedDepartmentId'];
 
                 removeSecretaryDepartmentId($selectedDepartmentId);
-                removeDepartment($selectedDepartmentId);
+                $isExecutedSuccessful = removeDepartment($selectedDepartmentId);
             }
         } else if ($submit == 'transfer') {
             if (!empty($_POST['selectedDepartmentId']) && !empty($_POST['transferToSelectedUniversityId'])) {
                 $selectedDepartmentId = $_POST['selectedDepartmentId'];
                 $transferToSelectedUniversityId = $_POST['transferToSelectedUniversityId'];
-                transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId);
+                $isExecutedSuccessful = transferDepartment($selectedDepartmentId, $transferToSelectedUniversityId);
             }
         }
     }
 }
+
+if(!empty($isExecutedSuccessful)){
+    if($isExecutedSuccessful) $statusMessage = "";
+    else $statusMessage = "Not Worked";
+} else {
+    $statusMessage = "Please fill all the form data.";
+}
+echo $statusMessage;
 
 ?>

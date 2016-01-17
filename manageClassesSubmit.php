@@ -13,24 +13,32 @@ if(!empty($_POST)){
                 $professorId = $_POST['selectedProfessorId'];
                 $courseId = $_POST['selectedCourseId'];
 
-                addClass($className, $departmentId, $professorId, $courseId);
+                $isExecutedSuccessful = addClass($className, $departmentId, $professorId, $courseId);
             }
         } else if ($submit == 'rename') {
             if (!empty($_POST['selectedClassId'])) {
                 $classId = $_POST['selectedClassId'];
                 if(!empty($_POST['className'])){
                     $className = $_POST['className'];
-                    renameClass($className, $classId);
+                    $isExecutedSuccessful =  renameClass($className, $classId);
                 }
             }
         } else if ($submit == 'remove') {
             if (!empty($_POST['selectedClassId'])) {
                 $classId = $_POST['selectedClassId'];
 
-                removeClass($classId);
+                $isExecutedSuccessful = removeClass($classId);
             }
         }
     }
 }
+
+if(!empty($isExecutedSuccessful)){
+    if($isExecutedSuccessful) $statusMessage = "";
+    else $statusMessage = "Not Worked";
+} else {
+    $statusMessage = "Please fill all the form data.";
+}
+echo $statusMessage;
 
 ?>

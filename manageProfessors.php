@@ -6,6 +6,7 @@
 <script src="formSubmitAjax.js"></script>
 
 <div class="formContainer">
+    <div id="msg"></div>
     <div class="professor" id="add">
         <h4>Add Professor</h4>
         <form action="manageProfessorsSubmit.php" method="post">
@@ -25,7 +26,7 @@
     </div>
 
     <div class="professor" id="change">
-        <h4>Change Professor UserName And Password</h4>
+        <h4>Change Professor Username And Password</h4>
         <form action="manageProfessorsSubmit.php" method="post">
             <?php
         if(isLoginAsAdmin()) {

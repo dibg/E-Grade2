@@ -11,19 +11,19 @@ if(!empty($_POST)){
                 $professorUsername = $_POST['professorUsername'];
                 $professorPassword = $_POST['professorPassword'];
 
-                addProfessor($professorUsername, $professorPassword, $departmentId);
+                $isExecutedSuccessful = addProfessor($professorUsername, $professorPassword, $departmentId);
             }
         } else if ($submit == 'change') {
             if (!empty($_POST['selectedProfessorId'])) {
                 $professorId = $_POST['selectedProfessorId'];
                 if(!empty($_POST['professorUsername'])){
                     $professorUsername = $_POST['professorUsername'];
-                    changeProfessorUsername($professorUsername, $professorId);
+                    $isExecutedSuccessful =  changeProfessorUsername($professorUsername, $professorId);
                 }
 
                 if(!empty($_POST['professorPassword'])){
                     $professorPassword = $_POST['professorPassword'];
-                    changeProfessorPassword($professorPassword, $professorId);
+                    $isExecutedSuccessful = changeProfessorPassword($professorPassword, $professorId);
                 }
             }
         } else if ($submit == 'transfer') {
@@ -31,15 +31,24 @@ if(!empty($_POST)){
                 $professorId = $_POST['selectedProfessorId'];
                 $departmentIdTo = $_POST['selectedDepartmentIdTo'];
 
-                transferProfessor($professorId, $departmentIdTo);
+                $isExecutedSuccessful = transferProfessor($professorId, $departmentIdTo);
             }
         } else if ($submit == 'remove') {
             if (!empty($_POST['selectedProfessorId'])) {
                 $professorId = $_POST['selectedProfessorId'];
 
-                removeProfessor($professorId);
+                $isExecutedSuccessful = removeProfessor($professorId);
             }
         }
     }
 }
+
+if(!empty($isExecutedSuccessful)){
+    if($isExecutedSuccessful) $statusMessage = "";
+    else $statusMessage = "Not Worked";
+} else {
+    $statusMessage = "Please fill all the form data.";
+}
+echo $statusMessage;
+
 ?>

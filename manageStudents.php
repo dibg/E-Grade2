@@ -6,6 +6,7 @@
 <script src="formSubmitAjax.js"></script>
 
 <div class="formContainer">
+    <div id="msg"></div>
     <div class="student" id="add">
         <h4>Add Student</h4>
         <form action="manageStudentsSubmit.php" method="post">

@@ -12,7 +12,7 @@ $(document).ready(function() {
                 success:function(html)
                 {
                     //window.alert('hi');
-                    //$('#msg').html(html);
+                    $('#msg').html(html);
                     $('#' + submitType + ' input[type="text"]').val("");
                     $('select').change();
                 },

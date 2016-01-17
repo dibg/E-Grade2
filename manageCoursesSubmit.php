@@ -10,14 +10,14 @@ if(!empty($_POST)){
                 $departmentId = $_POST['selectedDepartmentId'];
                 $courseName = $_POST['courseName'];
 
-                addCourse($courseName, $departmentId);
+                $isExecutedSuccessful = addCourse($courseName, $departmentId);
             }
         } else if ($submit == 'rename') {
             if (!empty($_POST['selectedCourseId'])) {
                 $courseId = $_POST['selectedCourseId'];
                 if(!empty($_POST['courseName'])){
                     $courseName = $_POST['courseName'];
-                    renameCourse($courseName, $courseId);
+                    $isExecutedSuccessful = renameCourse($courseName, $courseId);
                 }
             }
         } else if ($submit == 'transfer') {
@@ -25,16 +25,24 @@ if(!empty($_POST)){
                 $courseId = $_POST['selectedCourseId'];
                 $departmentIdTo = $_POST['selectedDepartmentIdTo'];
 
-                transferCourse($courseId, $departmentIdTo);
+                $isExecutedSuccessful = transferCourse($courseId, $departmentIdTo);
             }
         } else if ($submit == 'remove') {
             if (!empty($_POST['selectedCourseId'])) {
                 $courseId = $_POST['selectedCourseId'];
 
-                removeCourse($courseId);
+                $isExecutedSuccessful = removeCourse($courseId);
             }
         }
     }
 }
+
+if(!empty($isExecutedSuccessful)){
+    if($isExecutedSuccessful) $statusMessage = "";
+    else $statusMessage = "Not Worked";
+} else {
+    $statusMessage = "Please fill all the form data.";
+}
+echo $statusMessage;
 
 ?>

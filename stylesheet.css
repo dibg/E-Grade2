@@ -77,7 +77,11 @@ body{
     background-color: rgba(254, 220, 254, 0.5);
 }
 /* ---------------------- divs ---------------------- */
-/*add div style here*/
+
+#msg {
+    text-align: center;
+}
+
 .formContainer {
     max-width: 750px;
     margin: 0 auto;

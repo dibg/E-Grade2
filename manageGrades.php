@@ -6,6 +6,7 @@
 <script src="formSubmitAjax.js"></script>
 
 <div class="formContainer">
+    <div id="msg"></div>
     <div class="grade" id="add">
         <h4>Add Grade</h4>
         <form action="manageGradesSubmit.php" method="post">

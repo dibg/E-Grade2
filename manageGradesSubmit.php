@@ -10,24 +10,31 @@ if(!empty($_POST)){
                 $gradeValue = $_POST['gradeValue'];
                 $courseId = $_POST['selectedCourseId'];
 
-                addGrade($gradeValue, $studentId, $courseId);
+                $isExecutedSuccessful = addGrade($gradeValue, $studentId, $courseId);
             }
         } else if ($submit == 'change') {
             if (!empty($_POST['selectedGradeId']) && !empty($_POST['gradeValue'])) {
                 $gradeId = $_POST['selectedGradeId'];
                 $gradeValue = $_POST['gradeValue'];
 
-
-                changeGrade($gradeValue, $gradeId);
+                $isExecutedSuccessful =changeGrade($gradeValue, $gradeId);
             }
         } else if ($submit == 'remove') {
             if (!empty($_POST['selectedGradeId'])) {
                 $gradeId = $_POST['selectedGradeId'];
 
-                removeGrade($gradeId);
+                $isExecutedSuccessful = removeGrade($gradeId);
             }
         }
     }
 }
+
+if(!empty($isExecutedSuccessful)){
+    if($isExecutedSuccessful) $statusMessage = "";
+    else $statusMessage = "Not Worked";
+} else {
+    $statusMessage = "Please fill all the form data.";
+}
+echo $statusMessage;
 
 ?>

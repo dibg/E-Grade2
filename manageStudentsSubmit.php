@@ -1,6 +1,6 @@
 <?php
 include 'functions.php';
-var_dump($_POST);
+$statusMessage = "Please fill all the form data.";
 
 if(!empty($_POST)){
     if (!empty($_POST['submit'])) {
@@ -12,19 +12,19 @@ if(!empty($_POST)){
                 $studentUsername = $_POST['StudentUsername'];
                 $studentPassword = $_POST['StudentPassword'];
 
-                addStudent($studentUsername, $studentPassword, $departmentId);
+                $isExecutedSuccessful = addStudent($studentUsername, $studentPassword, $departmentId);
             }
         } else if ($submit == 'change') {
             if (!empty($_POST['selectedStudentId'])) {
                 $studentId = $_POST['selectedStudentId'];
                 if(!empty($_POST['studentUsername'])){
                     $studentUsername = $_POST['studentUsername'];
-                    changestudentUsername($studentUsername, $studentId);
+                    $isExecutedSuccessful = changestudentUsername($studentUsername, $studentId);
                 }
 
                 if(!empty($_POST['studentPassword'])){
                     $studentPassword = $_POST['studentPassword'];
-                    changestudentPassword($studentPassword, $studentId);
+                    $isExecutedSuccessful = changestudentPassword($studentPassword, $studentId);
                 }
             }
         } else if ($submit == 'transfer') {
@@ -32,15 +32,24 @@ if(!empty($_POST)){
                 $studentId = $_POST['selectedStudentId'];
                 $departmentIdTo = $_POST['selectedDepartmentIdTo'];
 
-                transferStudent($studentId, $departmentIdTo);
+                $isExecutedSuccessful = transferStudent($studentId, $departmentIdTo);
             }
         } else if ($submit == 'remove') {
             if (!empty($_POST['selectedStudentId'])) {
                 $studentId = $_POST['selectedStudentId'];
 
-                removeStudent($studentId);
+                $isExecutedSuccessful = removeStudent($studentId);
             }
         }
     }
 }
+
+if(!empty($isExecutedSuccessful)){
+    if($isExecutedSuccessful) $statusMessage = "";
+    else $statusMessage = "Not Worked";
+} else {
+    $statusMessage = "Please fill all the form data.";
+}
+echo $statusMessage;
+
 ?>
