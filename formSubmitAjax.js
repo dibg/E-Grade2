@@ -28,7 +28,6 @@ $(document).ready(function() {
     });
 
     $(document).on("formSubmitted", function () {
-        e.preventDefault();
         $.ajax({
             type: 'POST',
             url: 'ajaxSubmit.php',
