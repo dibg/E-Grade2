@@ -133,7 +133,7 @@ function getTableWithAllDepartments($universityName) {
 }
 
 function generateDropDownList($data, $nameTag, $classTag="none", $idTag="none"){
-    $output = "<select name='$nameTag'";
+    $output = "<select autocomplete='off' name='$nameTag'";
     if($classTag != "none"){
         $output .= " class='$classTag'";
     }

@@ -14,6 +14,7 @@ $(document).ready(function() {
                     //window.alert(html);
                     $('#msg').html(html);
                     $('#' + submitType + ' input[type="text"]').val("");
+                    $(document).trigger("formSubmitted");
                     $('select').change();
                 },
                 error: function(html)

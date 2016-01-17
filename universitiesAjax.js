@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.formContainer input[type=submit]').change(function () { //todo not refreshing
+    $(document).on("formSubmitted", function () {
             $.ajax({
                 type: 'POST',
                 url: 'ajaxSubmit.php',
