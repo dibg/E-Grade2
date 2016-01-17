@@ -7,7 +7,7 @@
 <div class="formContainer">
     <div class="course" id="add">
         <h4>Add Course</h4>
-        <form action="" method="post">
+        <form action="manageCoursesSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityAdd');
@@ -24,7 +24,7 @@
 
     <div class="course" id="rename">
         <h4>Rename Course</h4>
-        <form action="" method="post">
+        <form action="manageCoursesSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityChange');
@@ -46,7 +46,7 @@
         if(isLoginAsAdmin()) {
             ?>
             <h4>Transfer Course University And Department</h4>
-            <form action="" method="post">
+            <form action="manageCoursesSubmit.php" method="post">
                 <?php
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityTransfer');
                 echo generateDropDownListWithFirstOption(null, "Select University First", 'selectedDepartmentId', 'selectedDepartmentTransfer');
@@ -63,7 +63,7 @@
 
     <div class="course" id="remove">
         <h4>Remove Course</h4>
-        <form action="" method="post">
+        <form action="manageCoursesSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityRemove');
@@ -82,41 +82,5 @@
 </div>
 
 <?php
-if(!empty($_POST)){
-    if (!empty($_POST['submit'])) {
-        $submit = $_POST['submit'];
-
-        if ($submit == 'add') {
-            if (!empty($_POST['courseName'])&& !empty($_POST['selectedDepartmentId'])) {
-                $departmentId = $_POST['selectedDepartmentId'];
-                $courseName = $_POST['courseName'];
-
-                addCourse($courseName, $departmentId);
-            }
-        } else if ($submit == 'rename') {
-            if (!empty($_POST['selectedCourseId'])) {
-                $courseId = $_POST['selectedCourseId'];
-                if(!empty($_POST['courseName'])){
-                    $courseName = $_POST['courseName'];
-                    renameCourse($courseName, $courseId);
-                }
-            }
-        } else if ($submit == 'transfer') {
-            if (!empty($_POST['selectedCourseId']) && !empty($_POST['selectedDepartmentIdTo'])) {
-                $courseId = $_POST['selectedCourseId'];
-                $departmentIdTo = $_POST['selectedDepartmentIdTo'];
-
-                transferCourse($courseId, $departmentIdTo);
-            }
-        } else if ($submit == 'remove') {
-            if (!empty($_POST['selectedCourseId'])) {
-                $courseId = $_POST['selectedCourseId'];
-
-                removeCourse($courseId);
-            }
-        }
-    }
-    reloadPage();
-}
 include 'footer.php';
 ?>

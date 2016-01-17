@@ -152,6 +152,4 @@ $(document).ready(function(){
             $('#selectedProfessorRemove').html('<option value="">Select Department First</option>');
         }
     });
-
-
 });

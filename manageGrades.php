@@ -7,7 +7,7 @@
 <div class="formContainer">
     <div class="grade" id="add">
         <h4>Add Grade</h4>
-        <form action="" method="post">
+        <form action="manageGradesSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityAdd');
@@ -35,7 +35,7 @@
 
     <div class="grade" id="change">
         <h4>Change Grade</h4>
-        <form action="" method="post">
+        <form action="manageGradesSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityChange');
@@ -58,7 +58,7 @@
 
     <div class="grade" id="remove">
         <h4>Remove Grade</h4>
-        <form action="" method="post">
+        <form action="manageGradesSubmit.php" method="post">
             <?php
             if(isLoginAsAdmin()) {
                 echo generateDropDownListWithFirstOption(getAllUniversitiesNames(), "Select University", 'selectedUniversity', 'selectedUniversityRemove');
@@ -83,35 +83,6 @@
 </div>
 
 <?php
-if(!empty($_POST)){
-    if (!empty($_POST['submit'])) {
-        $submit = $_POST['submit'];
-        if ($submit == 'add') {
-            if (!empty($_POST['selectedStudentId']) && !empty($_POST['gradeValue']) && !empty($_POST['selectedCourseId'])) {
-                $studentId = $_POST['selectedStudentId'];
-                $gradeValue = $_POST['gradeValue'];
-                $courseId = $_POST['selectedCourseId'];
-
-                addGrade($gradeValue, $studentId, $courseId);
-            }
-        } else if ($submit == 'change') {
-            if (!empty($_POST['selectedGradeId']) && !empty($_POST['gradeValue'])) {
-                $gradeId = $_POST['selectedGradeId'];
-                $gradeValue = $_POST['gradeValue'];
-
-
-                changeGrade($gradeValue, $gradeId);
-            }
-        } else if ($submit == 'remove') {
-            if (!empty($_POST['selectedGradeId'])) {
-                $gradeId = $_POST['selectedGradeId'];
-
-                removeGrade($gradeId);
-            }
-        }
-    }
-   reloadPage();
-}
 include 'footer.php';
 ?>
 
